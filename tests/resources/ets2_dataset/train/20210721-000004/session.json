@@ -1,0 +1,13 @@
+{
+  "date": "20210721",
+  "session": "000004",
+  "gametime": "20:00:00",
+  "location": "Szcezin, Poland",
+  "environment": "urban",
+  "traffic": "1",
+  "camera": {
+    "fov": "72",
+    "near": "0.1",
+    "far": "3000"
+  }
+}

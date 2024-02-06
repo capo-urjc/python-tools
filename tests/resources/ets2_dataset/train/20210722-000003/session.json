@@ -1,0 +1,14 @@
+{
+  "date": "20210722",
+  "session": "000003",
+  "gametime": "14:30:00",
+  "location": "Paris, France",
+  "environment": "urban/highway",
+  "traffic": "9",
+  "weather": "0",
+  "camera": {
+    "fov": "72",
+    "near": "0.1",
+    "far": "3000"
+  }
+}
