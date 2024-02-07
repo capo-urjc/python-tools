@@ -21,6 +21,7 @@ dependencies = [
     "matplotlib>=3.8.2",
     "rawutil>=2.7.4",
     "pillow>=10.2.0",
+    "pandas>=2.2.0",
 ]
 dynamic = ["version"]
 
