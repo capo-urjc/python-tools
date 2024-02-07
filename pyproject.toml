@@ -1,3 +1,33 @@
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
+name = "capo_tools"
+description = "Tools for CAPO Research Group python projects"
+authors = [
+    {name="CAPO Research Group", email="info@caporesearch.es"},
+    {name="David María Arribas", email="david.maria@urjc.es"},
+    {name="Iván Ramírez Díaz", email="ivan.ramirez@urjc.es"}
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {file="LICENSE"}
+dependencies = [
+    "torch>=2.2.0",
+    "torchaudio>=2.2.0",
+    "torchvision>=0.17.0",
+    "numpy>=1.26.4",
+    "matplotlib>=3.8.2",
+    "rawutil>=2.7.4",
+    "pillow>=10.2.0",
+]
+dynamic = ["version"]
+
+[tool.pdm]
+version = { source = "file", path = "src/capo_tools/__version__.py" }
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "twine>=4.0.2",
+]

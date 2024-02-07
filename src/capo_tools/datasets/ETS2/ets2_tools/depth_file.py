@@ -1,6 +1,5 @@
 import os.path
 import struct
-import time
 import warnings
 
 import numpy as np
