@@ -32,4 +32,5 @@ version = { source = "file", path = "src/capo_tools/__version__.py" }
 dev = [
     "twine>=4.0.2",
     "pytest>=8.0.0",
+    "coverage>=7.4.1",
 ]
