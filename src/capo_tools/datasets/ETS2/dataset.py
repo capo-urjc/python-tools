@@ -37,7 +37,7 @@ class ETS2Dataset(Dataset):
 
         depth_file = read_depth_file(f"{file_path}.depth.raw")
         header = depth_file.header
-        depth = -depth_file.get_data()
+        depth = depth_file.get_data()
         depth_shape = (header.height, header.width, 1)
         depth = np.reshape(depth, depth_shape)
 

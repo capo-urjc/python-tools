@@ -1,4 +1,3 @@
-import math
 import os
 
 import numpy as np
@@ -16,11 +15,11 @@ def dataset_frame():
     image = Image.open('resources/ets2_dataset/train/20210721-000004/capture-0000000001.jpg')
     depth_file = read_depth_file('resources/ets2_dataset/train/20210721-000004/capture-0000000001.depth.raw')
     header = depth_file.header
-    depth = -depth_file.get_data()
+    depth = depth_file.get_data()
     depth_shape = (header.height, header.width, 1)
     depth = np.reshape(depth, depth_shape)
     return {'image': image, 'depth': depth, 'frame': 'resources/ets2_dataset/train/20210721-000004/capture-0000000001',
-            'metadata': pd.DataFrame([{'session': '20210721-000004', 'capture': 'capture-0000000001'}]) }
+            'metadata': pd.DataFrame([{'session': '20210721-000004', 'capture': 'capture-0000000001'}])}
 
 
 @pytest.fixture
@@ -44,6 +43,7 @@ def test_to_tensor(dataset_frame):
     assert sample['depth'].shape == dataset_frame['depth'].transpose(2, 0, 1).shape
     assert sample['image'].numpy().sum() == pytest.approx(np.array(dataset_frame['image'], np.float32).sum())
     assert sample['depth'].numpy().sum() == pytest.approx(dataset_frame['depth'].sum())
+    assert sample['depth'].min() >= 0
     assert sample['frame'] == dataset_frame['frame']
     assert sample['metadata'].equals(dataset_frame['metadata'])
 
