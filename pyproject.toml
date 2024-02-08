@@ -19,9 +19,9 @@ dependencies = [
     "rawutil>=2.7.4",
     "pillow>=10.2.0",
     "pandas>=2.2.0",
-    "torch==2.0.1",
-    "torchvision==0.15.2",
-    "torchaudio==2.0.2",
+    "torch>=2.0.1",
+    "torchvision>=0.15.2",
+    "torchaudio>=2.0.2",
 ]
 dynamic = ["version"]
 

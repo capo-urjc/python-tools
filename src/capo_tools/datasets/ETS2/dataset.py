@@ -41,13 +41,12 @@ class ETS2Dataset(Dataset):
         depth_shape = (header.height, header.width, 1)
         depth = np.reshape(depth, depth_shape)
 
-        sample = {'image': image, 'depth': depth, 'frame': file_path}
+        sample = {'image': image, 'depth': depth, 'frame': file_path, 'metadata': row}
 
         if self.transform:
             sample = self.transform(sample)
 
-        return sample['image'], sample['depth'], \
-            {"path": file_path, "session": row['session'], "capture": row['capture']}
+        return sample
 
     def __len__(self):
         """
@@ -122,4 +121,8 @@ class ToTensor(object):
         image, depth = sample['image'], sample['depth']
         image = pil_to_tensor(image).float()
         depth = torch.from_numpy(depth).float().permute(2, 0, 1)
-        return {'image': image, 'depth': depth}
+
+        metadata = sample['metadata']
+        frame = sample['frame']
+
+        return {'image': image, 'depth': depth, 'frame': frame, 'metadata': metadata}
