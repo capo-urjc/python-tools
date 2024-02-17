@@ -17,9 +17,10 @@ class ETS2Dataset(Dataset):
     The ETS2 Dataset, Synthetic Data from Video Games for Monocular Depth Estimation
     https://link.springer.com/chapter/10.1007/978-3-031-36616-1_30
     """
-    def __init__(self, data_path, indexes, is_train=False, transform=None):
+    def __init__(self, data_path, indexes, image_type: str = 'bmp', is_train: bool = False, transform=None):
         super(ETS2Dataset, self).__init__()
         self.data_path = data_path
+        self.image_type = image_type
         self.is_train = is_train
         self.data = get_data(self.data_path)
         self.indexes = indexes if indexes is not None else list(range(len(self.data)))
@@ -33,7 +34,7 @@ class ETS2Dataset(Dataset):
         index = self.indexes[item]
         row = self.data.iloc[index]
         file_path = os.path.join(self.data_path, row['session'], row['capture'])
-        image = Image.open(f"{file_path}.jpg")
+        image = Image.open(f"{file_path}.{self.image_type}")
 
         depth_file = read_depth_file(f"{file_path}.depth.raw")
         header = depth_file.header
