@@ -9,15 +9,37 @@ from torchvision.transforms.functional import pil_to_tensor
 from capo_tools.datasets.ETS2.ets2_tools import get_data
 from capo_tools.datasets.ETS2.ets2_tools.depth_file import read_depth_file
 
+"""dataset module
+
+Classes:
+    ETS2Dataset: Pytorch Dataset for ETS2 dataset, single frame
+    ETS2DatasetVideo: Pytorch Dataset for ETS2 dataset, video sequence
+    ToTensor: Convert ETS2 sample to Tensors
+"""
+
 
 class ETS2Dataset(Dataset):
-    """
-    Pytorch Dataset for ETS2 dataset, single frame
+    """Pytorch Dataset for ETS2 dataset, single frame
 
     The ETS2 Dataset, Synthetic Data from Video Games for Monocular Depth Estimation
     https://link.springer.com/chapter/10.1007/978-3-031-36616-1_30
+
+    Attributes:
+        data_path (str): Path to the dataset
+        is_train (bool): Whether the dataset is for training or not
+        data (DataFrame): Telemetry data
+        indexes (list): List of indexes to use from the dataset
+        transform (callable): Optional transform to be applied to the sample
     """
+
     def __init__(self, data_path, indexes, is_train=False, transform=None):
+        """Constructor method
+        Args:
+            data_path (str): Path to the dataset
+            indexes (list): List of indexes to use from the dataset
+            is_train (bool): Whether the dataset is for training or not
+            transform (callable): Optional transform to be applied to the sample
+        """
         super(ETS2Dataset, self).__init__()
         self.data_path = data_path
         self.is_train = is_train
@@ -26,9 +48,11 @@ class ETS2Dataset(Dataset):
         self.transform = transform if transform is not None else ToTensor()
 
     def __getitem__(self, item):
-        """
-        Get a single frame from the dataset
+        """Get a single frame from the dataset
         Returns a tuple with the image and the depth map and a dictionary with the metadata
+
+        Args:
+            item (int): Index of the frame to get
         """
         index = self.indexes[item]
         row = self.data.iloc[index]
@@ -49,8 +73,10 @@ class ETS2Dataset(Dataset):
         return sample
 
     def __len__(self):
-        """
-        Get the number of frames in the dataset
+        """Get the number of frames in the dataset
+
+        Returns:
+            int: Number of frames in the dataset
         """
         return len(self.indexes)
 
@@ -62,6 +88,7 @@ class ETS2DatasetVideo(Dataset):
     The ETS2 Dataset, Synthetic Data from Video Games for Monocular Depth Estimation
     https://link.springer.com/chapter/10.1007/978-3-031-36616-1_30
     """
+
     def __init__(self, indexes, data_path, is_train=False, transform=None, max_depth: float = 80.0):
         super(ETS2DatasetVideo, self).__init__()
         self.data_path = data_path
@@ -117,6 +144,7 @@ class ToTensor(object):
     Returns a dictionary with two elements, image and depth, both as Tensors
     This class doesn't perform any transformation on the data, it just converts the data to Tensors
     """
+
     def __call__(self, sample):
         image, depth = sample['image'], sample['depth']
         image = pil_to_tensor(image).float()
