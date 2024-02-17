@@ -9,16 +9,16 @@ from PIL import Image
 from capo_tools.datasets.ETS2.dataset import ToTensor, ETS2Dataset
 
 
-@pytest.fixture
-def dataset_frame():
+@pytest.fixture(params=['jpg', 'bmp'])
+def dataset_frame(request):
     from capo_tools.datasets.ETS2.ets2_tools.depth_file import read_depth_file
-    image = Image.open('resources/ets2_dataset/train/20210721-000004/capture-0000000001.jpg')
+    image = Image.open(f'resources/ets2_dataset/train/20210721-000004/capture-0000000001.{request.param}')
     depth_file = read_depth_file('resources/ets2_dataset/train/20210721-000004/capture-0000000001.depth.raw')
     header = depth_file.header
     depth = depth_file.get_data()
     depth_shape = (header.height, header.width, 1)
     depth = np.reshape(depth, depth_shape)
-    return {'image': image, 'depth': depth, 'frame': 'resources/ets2_dataset/train/20210721-000004/capture-0000000001',
+    yield {'image': image, 'depth': depth, 'frame': 'resources/ets2_dataset/train/20210721-000004/capture-0000000001',
             'metadata': pd.DataFrame([{'session': '20210721-000004', 'capture': 'capture-0000000001'}])}
 
 
@@ -35,129 +35,56 @@ def dataset_test_path():
     return "resources/ets2_dataset/train"
 
 
+@pytest.fixture(params=['jpg', 'bmp'])
+def pytorch_dataset_frame(request, dataset_test_path):
+    dataset = ETS2Dataset(dataset_test_path, range(10), image_type=request.param)
+    yield dataset, request.param
+
+
+@pytest.fixture
+def dataset_test_all_frames():
+    frames = [
+        {'session': '20210721-000004', 'capture': 'capture-0000000001'},
+        {'session': '20210721-000004', 'capture': 'capture-0000000002'},
+        {'session': '20210721-000004', 'capture': 'capture-0000000003'},
+        {'session': '20210721-000004', 'capture': 'capture-0000000004'},
+        {'session': '20210721-000004', 'capture': 'capture-0000000005'},
+        {'session': '20210722-000003', 'capture': 'capture-0000000001'},
+        {'session': '20210722-000003', 'capture': 'capture-0000000002'},
+        {'session': '20210722-000003', 'capture': 'capture-0000000003'},
+        {'session': '20210722-000003', 'capture': 'capture-0000000004'},
+        {'session': '20210722-000003', 'capture': 'capture-0000000005'}
+    ]
+    yield frames
+
+
 def test_to_tensor(dataset_frame):
+    frame = dataset_frame
     to_tensor = ToTensor()
-    sample = to_tensor(dataset_frame)
+    sample = to_tensor(frame)
 
-    assert sample['image'].shape == np.array(dataset_frame['image']).transpose(2, 0, 1).shape
-    assert sample['depth'].shape == dataset_frame['depth'].transpose(2, 0, 1).shape
-    assert sample['image'].numpy().sum() == pytest.approx(np.array(dataset_frame['image'], np.float32).sum())
-    assert sample['depth'].numpy().sum() == pytest.approx(dataset_frame['depth'].sum())
+    assert sample['image'].shape == np.array(frame['image']).transpose(2, 0, 1).shape
+    assert sample['depth'].shape == frame['depth'].transpose(2, 0, 1).shape
+    assert sample['image'].numpy().sum() == pytest.approx(np.array(frame['image'], np.float32).sum())
+    assert sample['depth'].numpy().sum() == pytest.approx(frame['depth'].sum())
     assert sample['depth'].min() >= 0
-    assert sample['frame'] == dataset_frame['frame']
-    assert sample['metadata'].equals(dataset_frame['metadata'])
+    assert sample['frame'] == frame['frame']
+    assert sample['metadata'].equals(frame['metadata'])
 
 
-def test_frame_dataset(dataset_test_path):
-    dataset = ETS2Dataset(dataset_test_path, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+def test_pytorch_dataset_frame(pytorch_dataset_frame, dataset_test_all_frames, dataset_test_path):
+    dataset, data_type = pytorch_dataset_frame
     assert len(dataset) == 10
 
-    row = dataset[0]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210721-000004/capture-0000000001")
-    assert metadata['session'] == "20210721-000004"
-    assert metadata['capture'] == "capture-0000000001"
+    for i, test_frame in enumerate(dataset_test_all_frames):
+        frame = dataset[i]
+        path = os.path.join(dataset_test_path, test_frame['session'], test_frame['capture'])
+        image = Image.open(f"{path}.{data_type}")
 
-    row = dataset[1]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210721-000004/capture-0000000002")
-    assert metadata['session'] == "20210721-000004"
-    assert metadata['capture'] == "capture-0000000002"
-
-    row = dataset[2]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210721-000004/capture-0000000003")
-    assert metadata['session'] == "20210721-000004"
-    assert metadata['capture'] == "capture-0000000003"
-
-    row = dataset[3]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210721-000004/capture-0000000004")
-    assert metadata['session'] == "20210721-000004"
-    assert metadata['capture'] == "capture-0000000004"
-
-    row = dataset[4]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210721-000004/capture-0000000005")
-    assert metadata['session'] == "20210721-000004"
-    assert metadata['capture'] == "capture-0000000005"
-
-    row = dataset[5]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210722-000003/capture-0000000001")
-    assert metadata['session'] == "20210722-000003"
-    assert metadata['capture'] == "capture-0000000001"
-
-    row = dataset[6]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210722-000003/capture-0000000002")
-    assert metadata['session'] == "20210722-000003"
-    assert metadata['capture'] == "capture-0000000002"
-
-    row = dataset[7]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210722-000003/capture-0000000003")
-    assert metadata['session'] == "20210722-000003"
-    assert metadata['capture'] == "capture-0000000003"
-
-    row = dataset[8]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210722-000003/capture-0000000004")
-    assert metadata['session'] == "20210722-000003"
-    assert metadata['capture'] == "capture-0000000004"
-
-    row = dataset[9]
-    image = row['image']
-    depth = row['depth']
-    metadata = row['metadata']
-    path = row['frame']
-    assert image.shape == (3, 816, 1440)
-    assert depth.shape == (1, 816, 1440)
-    assert os.path.normpath(path) == os.path.normpath("resources/ets2_dataset/train/20210722-000003/capture-0000000005")
-    assert metadata['session'] == "20210722-000003"
-    assert metadata['capture'] == "capture-0000000005"
+        assert frame['image'].shape == (3, 816, 1440)
+        assert frame['depth'].shape == (1, 816, 1440)
+        assert os.path.normpath(frame['frame']) == os.path.normpath(path)
+        assert frame['metadata']['session'] == test_frame['session']
+        assert frame['metadata']['capture'] == test_frame['capture']
+        assert frame['image'].numpy().sum() == pytest.approx(np.array(image, np.float32).sum())
+        assert frame['depth'].numpy().sum() == pytest.approx(frame['depth'].sum())
