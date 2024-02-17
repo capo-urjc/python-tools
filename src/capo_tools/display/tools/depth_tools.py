@@ -3,6 +3,7 @@ import numpy as np
 
 
 def normalize(data):
+    """Normalize the data to the range [0, 1]"""
     max = float(data.max())
     min = float(data.min())
     range = max - min if max != min else 1e10
@@ -10,6 +11,7 @@ def normalize(data):
 
 
 def colorize(data, colormap_name='magma', normalize_data=True, invert=False):
+    """Colorize the data using the specified colormap"""
     if normalize_data or invert:
         data = normalize(data)
 

@@ -6,11 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Upload Python Package
+name: Continuous Integration
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -22,10 +20,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
     - name: Set up PDM
       uses: pdm-project/setup-pdm@v4
     
-    # You are now able to use PDM in your workflow
     - name: Install dependencies
       run: pdm install
+
+    - name: Build docs
+      run: pdm run duty docs
