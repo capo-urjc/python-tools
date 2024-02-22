@@ -2,12 +2,12 @@ import torch
 import torch.nn.functional as F
 
 
-def psd2otf3d(kernel, input_shape, n=1):
+def psf2otf3d(kernel, input_shape, n=1):
     """
-    Convert PSD (Power Spectral Density) to OTF (Optical Transfer Function) in the frequency domain.
+    Convert PSF (Point Spread Function) to OTF (Optical Transfer Function) in the frequency domain.
 
     Args:
-        kernel (torch.Tensor): The PSD kernel.
+        kernel (torch.Tensor): The PSF kernel.
         input_shape (tuple): Shape of the input tensor (channels, height, width).
         n (int): Number of samples. Defaults to 1.
 
@@ -47,7 +47,7 @@ def ffp3d(tensor, kernel):
     c, h, w = tensor_pad.size()
 
     # Compute FFT of kernel and input tensor
-    kernel_fft = psd2otf3d(kernel, tensor_pad.size())
+    kernel_fft = psf2otf3d(kernel, tensor_pad.size())
     tensor_fft = torch.fft.fftn(tensor_pad, s=(c, h, w))
 
     # Compute inverse FFT and extract the valid part
