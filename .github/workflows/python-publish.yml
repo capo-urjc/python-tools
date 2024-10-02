@@ -29,3 +29,19 @@ jobs:
     # You are now able to use PDM in your workflow
     - name: Install dependencies
       run: pdm install
+
+    # Compiling the Python package
+    # Generate the distribution files: `sdist` (source Distribution) and `wheel` (binary)
+    - name: Build package
+      run: pdm build
+
+    # Publish package to PyPI using Twine
+    # Here we use the credentials stored in the repository secrets
+    - name: Publish package to PyPI
+      env:
+        TWINE_USERNAME: david.garcia  # PyPI user
+        TWINE_PASSWORD: B.wVC9u2;'8-}PV  # PyPI password
+      run: |
+         pdm export -f setuppy > setup.py  # Export if necessary a setup.py file (optional, depending on how the project is configured)
+         python -m pip install --upgrade twine  # Make sure Twine is installed
+         twine upload dist/*  # Upload the files generated in the `dist` folder to PyPI
