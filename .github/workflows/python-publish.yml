@@ -23,6 +23,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up PDM
       uses: pdm-project/setup-pdm@v4
     
@@ -35,13 +36,15 @@ jobs:
     - name: Build package
       run: pdm build
 
-    # Publish package to PyPI using Twine
-    # Here we use the credentials stored in the repository secrets
-    - name: Publish package to PyPI
+    # Ensure Twine is installed
+    - name: Install Twine
+      run: python -m pip install --upgrade twine
+
+    # Publish package to TestPyPI using Twine
+    # Here we use my credentials
+    - name: Publish package to TestPyPI
       env:
         TWINE_USERNAME: david.garcia  # PyPI user
         TWINE_PASSWORD: B.wVC9u2;'8-}PV  # PyPI password
       run: |
-         pdm export -f setuppy > setup.py  # Export if necessary a setup.py file (optional, depending on how the project is configured)
-         python -m pip install --upgrade twine  # Make sure Twine is installed
-         twine upload dist/*  # Upload the files generated in the `dist` folder to PyPI
+        twine upload --repository testpypi dist/*  # Upload the files to TestPyPI
