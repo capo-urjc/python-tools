@@ -47,4 +47,4 @@ jobs:
         TWINE_USERNAME: david.garcia  # PyPI user
         TWINE_PASSWORD: B.wVC9u2;'8-}PV  # PyPI password
       run: |
-        twine upload --repository testpypi dist/*  # Upload the files to TestPyPI
+        twine upload --repository-url https://test.pypi.org/project/capo_tools/ dist/*  # Upload the files to TestPyPI
