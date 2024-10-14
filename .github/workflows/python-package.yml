@@ -31,7 +31,7 @@ jobs:
 
     - name: Install dependencies with PDM
       run: |
-        pdm install
+        pdm install --dev
 
     - name: Lint with pylint
       run: |
