@@ -44,7 +44,7 @@ jobs:
     # Here we use my credentials
     - name: Publish package to TestPyPI
       env:
-        TWINE_USERNAME: david.garcia  # PyPI user
-        TWINE_PASSWORD: hrfvbwriguwrh12380  # PyPI password
+        TWINE_USERNAME: david.garcia  # TestPyPI user
+        TWINE_PASSWORD: hrfvbwriguwrh12380  # TestPyPI password
       run: |
-        twine upload --repository-url https://test.pypi.org/legacy/ --verbose dist/*  # Upload the files to TestPyPI
+        twine upload --repository-url https://test.pypi.org/legacy/ --verbose dist/* --skip-existing # Upload the files to TestPyPI
