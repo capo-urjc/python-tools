@@ -33,9 +33,9 @@ jobs:
       run: |
         pdm install --dev
 
-    - name: Lint with pylint
+    - name: Lint with flake8
       run: |
-        pdm run pylint src tests
+        pdm run flake8 src tests
 
     - name: Test with pytest
       run: |
