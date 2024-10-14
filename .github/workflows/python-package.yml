@@ -33,10 +33,12 @@ jobs:
       run: |
         pdm install --dev
 
+    - name: Test with pytest
+      run: |
+        pdm run pytest
+
     - name: Lint with flake8
       run: |
         pdm run flake8 src tests
 
-    - name: Test with pytest
-      run: |
-        pdm run pytest
+    
