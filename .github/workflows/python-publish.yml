@@ -34,7 +34,7 @@ jobs:
 
     # Build Sphinx documentation
     - name: Build Sphinx documentation
-      run: make html
+      run: sphinx-build -b html src/ build/markdown
 
     # Convert Sphinx .rst to Markdown
     - name: Convert Sphinx to Markdown
