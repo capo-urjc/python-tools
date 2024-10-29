@@ -53,6 +53,16 @@ jobs:
     - name: Convert Sphinx to Markdown
       run: sphinx-build -b dirhtml docs/source docs/build/markdown
 
+    # Create mkdocs.yml
+    - name: Create mkdocs.yml
+      run: |
+        if [ ! -f "mkdocs.yml" ]; then
+            echo "site_name: MyProject Documentation" > mkdocs.yml
+            echo "nav:" >> mkdocs.yml
+            echo "  - Home: index.md" >> mkdocs.yml
+            echo "docs_dir: docs/build/markdown" >> mkdocs.yml
+          fi
+
     # Build MkDocs documentation
     - name: Build MkDocs documentation
       run: mkdocs build
