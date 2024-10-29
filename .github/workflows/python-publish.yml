@@ -31,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install sphinx m2r2 sphinx_rtd_theme mkdocs mkdocs-material
+        pip install sphinx m2r2 sphinx_rtd_theme mkdocs mkdocs-material myst-parser
 
     # Initialize documentation
     - name: sphinx-quickstart to initialize documentation
@@ -41,13 +41,17 @@ jobs:
             sphinx-quickstart docs --sep -p "MyProject" -a "Author" -v "0.1" -q --ext-autodoc --ext-viewcode --makefile
           fi
 
+    # Add myst parser to configuration
+    - name: Update conf.py for myst_parser
+      run: echo "extensions.append('myst_parser')" >> docs/source/conf.py
+
     # Build Sphinx documentation
     - name: Build Sphinx documentation
       run: sphinx-build -b html docs/source docs/build/html
 
     # Convert Sphinx .rst to Markdown
     - name: Convert Sphinx to Markdown
-      run: sphinx-build -b markdown docs/source docs/build/markdown
+      run: sphinx-build -b dirhtml docs/source docs/build/markdown
 
     # Build MkDocs documentation
     - name: Build MkDocs documentation
