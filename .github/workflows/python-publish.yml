@@ -31,14 +31,15 @@ jobs:
     - name: Install dependencies
       run: |
          python -m pip install --upgrade pip
-         pdm install -G dev
+         python -m pip install build twine mkdocs mkdocs-material mkdocstrings pandoc
+    #pdm install -G dev
 
 
     # Build MkDocs documentation
     - name: Build MkDocs documentation
       run: |
         mkdocs build
-        # Convertir el HTML a Markdown (a README.md)
+    # Convertir el HTML a Markdown (a README.md)
         pandoc site/index.html -f html -t markdown -o README.md
 
     # Compiling the Python package
