@@ -1,0 +1,17 @@
+site_name: "Documentación del Proyecto"
+nav:
+  - Home: README.md  # Usamos README.md como único archivo de navegación
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          selection:
+            docstring_style: google
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - codehilite
