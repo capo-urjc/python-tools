@@ -39,7 +39,7 @@ jobs:
     - name: Build MkDocs documentation
       run: |
         mkdocs build
-    # Convertir el HTML a Markdown (a README.md)
+    # Convert HTML to Markdown (to README.md)
         pandoc site/index.html -f html -t markdown -o README.md
 
     # Compiling the Python package
