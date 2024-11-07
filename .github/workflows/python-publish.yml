@@ -37,7 +37,7 @@ jobs:
     - name: Build MkDocs documentation
       run: |
         mkdocs build
-        pandoc site/index.html -f html -t markdown -o README.md
+        pandoc site/api/index.html -f html -t markdown -o README.md
 
     # Compiling the Python package
     - name: Build package
