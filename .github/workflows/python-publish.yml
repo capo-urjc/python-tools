@@ -26,7 +26,7 @@ jobs:
 
     - name: Set up PDM
       uses: pdm-project/setup-pdm@v4
-    
+
     # Install dependencies
     - name: Install dependencies
       run: |
@@ -34,11 +34,9 @@ jobs:
          python -m pip install build twine mkdocs mkdocs-material mkdocstrings pandoc
 
 
-    # Build MkDocs documentation
     - name: Build MkDocs documentation
       run: |
         mkdocs build
-      # Convert HTML to Markdown (to README.md)
         pandoc site/index.html -f html -t markdown -o README.md
 
     # Compiling the Python package
