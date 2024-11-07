@@ -1,4 +1,5 @@
 site_name: "Documentación del Proyecto"
+docs_dir: .
 nav:
   - Home: README.md  # Usamos README.md como único archivo de navegación
 
