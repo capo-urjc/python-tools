@@ -7,8 +7,9 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          selection:
-            docstring_style: google
+        paths: ["src"]
+        selection:
+          docstring_style: google
 
 markdown_extensions:
   - admonition
