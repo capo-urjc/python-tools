@@ -1,4 +1,4 @@
-# This workflow will generate and publish documentation in docs
+# This workflow will generate and publish documentation in docs/api.md
 
 name: Generate and Publish Documentation
 
