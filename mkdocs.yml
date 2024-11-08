@@ -1,16 +1,19 @@
 site_name: "Documentación del Proyecto"
-docs_dir: .
+docs_dir: docs
+site_dir: site  # This site will generate static documentation
+
 nav:
-  - Home: README.md  # Usamos README.md como único archivo de navegación
+  - Home: index.md   # main navigation file
+  - API: api.md      # File that will be generated with the docstring references.
 
 plugins:
   - search
   - mkdocstrings:
       handlers:
         python:
-        paths: ["src"]
-        selection:
-          docstring_style: google
+          paths: ["src"]  # The folder containing your code with docstrings.
+          selection:
+            docstring_style: google
 
 markdown_extensions:
   - admonition
