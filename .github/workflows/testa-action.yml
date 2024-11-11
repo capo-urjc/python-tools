@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print message
-        run: echo "This is a test workflow"
+        run: echo "This is a test workflow" #this is an example
