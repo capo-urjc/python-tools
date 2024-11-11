@@ -38,7 +38,7 @@ jobs:
         pdm install -G dev
         
     - name: Build MkDocs documentation
-      run: mkdocs build --site-dir docs
+      run: mkdocs build --site-dir site
 
     - name: Commit and push changes
       run: |
