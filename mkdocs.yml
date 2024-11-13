@@ -12,8 +12,11 @@ plugins:
       handlers:
         python:
           paths: ["src"]  # The folder containing your code with docstrings.
+          options:
+            show_source: true
           selection:
             docstring_style: google
+
 
 markdown_extensions:
   - admonition
