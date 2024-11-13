@@ -55,8 +55,6 @@ jobs:
         publish_dir: ./site
 
 
-
-'''
     # Compiling the Python package
     - name: Build package
       run: |
@@ -71,8 +69,8 @@ jobs:
     # Here we use my credentials
     - name: Publish package to TestPyPI
       env:
-      '''
-        #TWINE_USERNAME: '__token__'  # TestPyPI user
-        #TWINE_PASSWORD: 'pypi-AgENdGVzdC5weXBpLm9yZwIkOWJkYTg2NzAtZjI2Ni00NzM5LTk5ZjYtMDE5MGQ5Y2E0YzgwAAISWzEsWyJjYXBvLXRvb2xzIl1dAAIsWzIsWyJiMjVkOTQ0My01ODc5LTRiYWMtYTE3Yi1jNWVmZmUyYmFjNzYiXV0AAAYgulX7v0XPB2L-kf5bpRwCTqriIvyfuiGiYb3VI9zrOQ4'  # TestPyPI password
-      #run: |
-        #twine upload --repository-url https://test.pypi.org/legacy/ --verbose dist/* # Upload the files to TestPyPI
+
+        TWINE_USERNAME: '__token__'  # TestPyPI user
+        TWINE_PASSWORD: 'pypi-AgENdGVzdC5weXBpLm9yZwIkOWJkYTg2NzAtZjI2Ni00NzM5LTk5ZjYtMDE5MGQ5Y2E0YzgwAAISWzEsWyJjYXBvLXRvb2xzIl1dAAIsWzIsWyJiMjVkOTQ0My01ODc5LTRiYWMtYTE3Yi1jNWVmZmUyYmFjNzYiXV0AAAYgulX7v0XPB2L-kf5bpRwCTqriIvyfuiGiYb3VI9zrOQ4'  # TestPyPI password
+      run: |
+        twine upload --repository-url https://test.pypi.org/legacy/ --verbose dist/* # Upload the files to TestPyPI
