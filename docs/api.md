@@ -1,9 +1,9 @@
 # API Reference
 
-::: capo_tools
+::: CAVE
 
-::: capo_tools.datasets
+::: CAVE.utils
 
-::: capo_tools.display
+::: ETS2
 
-::: capo_tools.pt_functions
+::: ETS2.ets2_tools
