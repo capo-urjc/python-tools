@@ -10,7 +10,7 @@
 
 ::: capo_tools.datasets.ETS2.dataset
 
-::: capo_tools.datasets.ETS2.ats2_tools.depth_file
+::: capo_tools.datasets.ETS2.ets2_tools.depth_file
 
 ::: capo_tools.display.tools.depth_tools
 
