@@ -15,7 +15,6 @@ on:
 
 permissions:
   contents: write
-  id-token: write
 
 jobs:
   deploy:
@@ -54,9 +53,11 @@ jobs:
         #github_token: ${{ secrets.GITHUB_TOKEN }}
         #publish_dir: ./site
 
-    - name: Confirm version
+    - name: Set version from GitHub release tag
       run: |
-        echo "Package version: ${{ github.event.release.tag_name }}"
+        VERSION="${{ github.event.release.tag_name }}"
+        sed -i "s/^version = .*/version = \"${VERSION}\"/" pyproject.toml
+        echo "Version set to: ${VERSION}"
 
     - name: Validate version format
       run: |
