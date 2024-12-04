@@ -33,25 +33,25 @@ jobs:
         pip install mkdocs mkdocstrings[python]
         pdm install -G dev
 
-    - name: Set PYTHONPATH
-      run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
+    #- name: Set PYTHONPATH
+      #run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
         
-    - name: Build MkDocs documentation
-      run: mkdocs build --site-dir site
+    #- name: Build MkDocs documentation
+      #run: mkdocs build --site-dir site
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.name "GitHub Action"
-        git config --global user.email "action@github.com"
-        git add -f site/
-        git commit -m "Update generated documentation"
-        git push
+    #- name: Commit and push changes
+      #run: |
+        #git config --global user.name "GitHub Action"
+        #git config --global user.email "action@github.com"
+        #git add -f site/
+        #git commit -m "Update generated documentation"
+        #git push
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+    #- name: Deploy to GitHub Pages
+      #uses: peaceiris/actions-gh-pages@v3
+      #with:
+        #github_token: ${{ secrets.GITHUB_TOKEN }}
+        #publish_dir: ./site
 
     - name: Confirm version
       run: |
