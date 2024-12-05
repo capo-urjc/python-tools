@@ -27,8 +27,8 @@ jobs:
     - name: Set up PDM
       uses: pdm-project/setup-pdm@v4
 
-    - name: Fetch tags
-      run: git fetch --tags
+    #- name: Fetch tags
+      #run: git fetch --tags
 
 
     - name: Install dependencies
@@ -70,11 +70,17 @@ jobs:
         echo "VERSION=$VERSION" >> $GITHUB_ENV
         echo "Extracted version: $VERSION"
 
-    # Actualiza el archivo pyproject.toml con la versión del tag
-    - name: Set version in pyproject.toml
+    - name: Generate __version__.py
       run: |
-        sed -i "s/^version = .*/version = \"${VERSION}\"/" pyproject.toml
-        echo "Updated pyproject.toml with version: ${VERSION}"
+        VERSION="${{ github.event.release.tag_name }}"
+        echo "__version__ = '${VERSION#v}'" > src/capo_tools/__version__.py
+
+
+    # Actualiza el archivo pyproject.toml con la versión del tag
+    #- name: Set version in pyproject.toml
+      #run: |
+        #sed -i "s/^version = .*/version = \"${VERSION}\"/" pyproject.toml
+        #echo "Updated pyproject.toml with version: ${VERSION}"
       
 
       # Compiling the Python package
