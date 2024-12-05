@@ -27,37 +27,13 @@ jobs:
     - name: Set up PDM
       uses: pdm-project/setup-pdm@v4
 
-    #- name: Fetch tags
-      #run: git fetch --tags
-
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install mkdocs mkdocstrings[python]
         pdm install -G dev
 
-    #- name: Set PYTHONPATH
-      #run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
-        
-    #- name: Build MkDocs documentation
-      #run: mkdocs build --site-dir site
 
-    #- name: Commit and push changes
-      #run: |
-        #git config --global user.name "GitHub Action"
-        #git config --global user.email "action@github.com"
-        #git add -f site/
-        #git commit -m "Update generated documentation"
-        #git push
-
-    #- name: Deploy to GitHub Pages
-      #uses: peaceiris/actions-gh-pages@v3
-      #with:
-        #github_token: ${{ secrets.GITHUB_TOKEN }}
-        #publish_dir: ./site
-
-    # Valida y extrae la versión del tag del release
+    # Validate version tag
     - name: Validate and extract version from tag
       id: extract_version
       run: |
@@ -75,14 +51,6 @@ jobs:
         VERSION="${{ github.event.release.tag_name }}"
         echo "__version__ = '${VERSION#v}'" > src/capo_tools/__version__.py
 
-
-    # Actualiza el archivo pyproject.toml con la versión del tag
-    #- name: Set version in pyproject.toml
-      #run: |
-        #sed -i "s/^version = .*/version = \"${VERSION}\"/" pyproject.toml
-        #echo "Updated pyproject.toml with version: ${VERSION}"
-      
-
       # Compiling the Python package
     - name: Build package
       run: |
@@ -92,8 +60,6 @@ jobs:
     # Ensure Twine is installed
     - name: Install Twine
       run: pdm add --dev twine
-
-
 
     # Publish package to TestPyPI using Twine
     # Here we use my credentials

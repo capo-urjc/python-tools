@@ -1,13 +1,15 @@
 # Manual de Usuario
 
-Este manual describe el funcionamiento de las tres acciones automatizadas disponibles en este proyecto. Cada acción está diseñada para facilitar tareas clave como la gestión de dependencias, generación de documentación y despliegue de paquetes.
+Este manual describe el funcionamiento de las tres acciones automatizadas disponibles en este proyecto.
+Cada acción está diseñada para facilitar tareas clave como la gestión de dependencias, generación de documentación y despliegue de paquetes.
 
 ---
 
 ## 1. **Instalar dependencias, ejecutar linting y tests**
 
 ### Descripción
-Esta acción instala las dependencias del proyecto, ejecuta análisis de código con `flake8` y realiza los tests definidos en el proyecto. Se activa en los siguientes casos:
+Esta acción instala las dependencias del proyecto, ejecuta análisis de código con `flake8` y realiza los tests definidos en el proyecto.
+Se activa en los siguientes casos:
 - Cuando se hace un **push** a la rama `main`.
 - Cuando se crea un **pull request**.
 
@@ -31,7 +33,7 @@ Esta acción genera la documentación del proyecto combinando:
 El resultado es un sitio de documentación actualizado automáticamente.
 
 ### Proceso
-1. Escanea los archivos en `src/` y procesa los **docstrings** usando herramientas como `mkdocstrings`.
+1. Escanea los archivos en `src/` y procesa los **docstrings**.
 2. Incluye la documentación manual definida en `docs/`.
 3. Genera un sitio estático que puede ser desplegado para consulta.
 
