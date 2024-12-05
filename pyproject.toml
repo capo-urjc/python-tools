@@ -29,7 +29,7 @@ dependencies = [
 dynamic = ["version"]
 
 [tool.pdm]
-version = { source = "git-tag" }
+version = { source = "file", path = "src/capo_tools/__version__.py" }
 
 [tool.pdm.dev-dependencies]
 dev = [
