@@ -53,18 +53,24 @@ jobs:
         #github_token: ${{ secrets.GITHUB_TOKEN }}
         #publish_dir: ./site
 
-    - name: Set version from GitHub release tag
+    # Valida y extrae la versión del tag del release
+    - name: Validate and extract version from tag
+      id: extract_version
       run: |
-        VERSION="${{ github.event.release.tag_name }}"
-        sed -i "s/^version = .*/version = \"${VERSION}\"/" pyproject.toml
-        echo "Version set to: ${VERSION}"
-
-    - name: Validate version format
-      run: |
-        if [[ ! "${{ github.event.release.tag_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        TAG_NAME="${{ github.event.release.tag_name }}"
+        if [[ ! "$TAG_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
           echo "Error: Tag name is not in the correct format (vX.X.X)."
           exit 1
         fi
+        VERSION=${TAG_NAME#v} # Elimina la 'v' al inicio
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Extracted version: $VERSION"
+
+    # Actualiza el archivo pyproject.toml con la versión del tag
+    - name: Set version in pyproject.toml
+      run: |
+        sed -i "s/^version = .*/version = \"${VERSION}\"/" pyproject.toml
+        echo "Updated pyproject.toml with version: ${VERSION}"
       
 
       # Compiling the Python package
