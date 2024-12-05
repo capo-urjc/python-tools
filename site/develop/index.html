@@ -69,15 +69,19 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#manual-de-usuario" class="nav-link">Manual de Usuario</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#funciones-principales" class="nav-link">Funciones principales</a>
+            <li class="nav-item" data-bs-level="2"><a href="#1-instalar-dependencias-ejecutar-linting-y-tests" class="nav-link">1. Instalar dependencias, ejecutar linting y tests</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#configuracion-inicial" class="nav-link">Configuración inicial</a>
+            <li class="nav-item" data-bs-level="2"><a href="#2-generar-documentacion-automaticamente" class="nav-link">2. Generar documentación automáticamente</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#resolucion-de-problemas" class="nav-link">Resolución de problemas</a>
+            <li class="nav-item" data-bs-level="2"><a href="#3-crear-y-publicar-paquete-en-test-pypi" class="nav-link">3. Crear y publicar paquete en Test PyPI</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#preguntas-frecuentes-faq" class="nav-link">Preguntas Frecuentes (FAQ)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -89,20 +93,74 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="manual-de-usuario">Manual de Usuario<a class="headerlink" href="#manual-de-usuario" title="Permanent link">&para;</a></h1>
-<p>Bienvenido al manual de usuario. Aquí encontrarás información detallada sobre cómo utilizar esta aplicación.</p>
-<h2 id="funciones-principales">Funciones principales<a class="headerlink" href="#funciones-principales" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Función 1: Descripción.</li>
-<li>Función 2: Descripción.</li>
-</ul>
-<h2 id="configuracion-inicial">Configuración inicial<a class="headerlink" href="#configuracion-inicial" title="Permanent link">&para;</a></h2>
-<p>Pasos para configurar la aplicación:</p>
+<p>Este manual describe el funcionamiento de las tres acciones automatizadas disponibles en este proyecto.
+Cada acción está diseñada para facilitar tareas clave como la gestión de dependencias, generación de documentación y despliegue de paquetes.</p>
+<hr />
+<h2 id="1-instalar-dependencias-ejecutar-linting-y-tests">1. <strong>Instalar dependencias, ejecutar linting y tests</strong><a class="headerlink" href="#1-instalar-dependencias-ejecutar-linting-y-tests" title="Permanent link">&para;</a></h2>
+<h3 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h3>
+<p>Esta acción instala las dependencias del proyecto, ejecuta análisis de código con <code>flake8</code> y realiza los tests definidos en el proyecto.
+Se activa en los siguientes casos:
+- Cuando se hace un <strong>push</strong> a la rama <code>main</code>.
+- Cuando se crea un <strong>pull request</strong>.</p>
+<h3 id="proceso">Proceso<a class="headerlink" href="#proceso" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Instalar las dependencias.</li>
-<li>Configurar los archivos de configuración.</li>
+<li>Instala todas las dependencias necesarias definidas en los archivos del proyecto.</li>
+<li>Ejecuta <code>flake8</code> para asegurarse de que el código cumple con las normas de estilo y calidad.</li>
+<li>Corre los tests definidos, asegurándose de que el proyecto es funcional y no contiene errores.</li>
 </ol>
-<h2 id="resolucion-de-problemas">Resolución de problemas<a class="headerlink" href="#resolucion-de-problemas" title="Permanent link">&para;</a></h2>
-<p>Preguntas frecuentes y soluciones.</p></div>
+<h3 id="activacion">Activación<a class="headerlink" href="#activacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Trigger:</strong> Push a <code>main</code> o Pull Request.</li>
+</ul>
+<hr />
+<h2 id="2-generar-documentacion-automaticamente">2. <strong>Generar documentación automáticamente</strong><a class="headerlink" href="#2-generar-documentacion-automaticamente" title="Permanent link">&para;</a></h2>
+<h3 id="descripcion_1">Descripción<a class="headerlink" href="#descripcion_1" title="Permanent link">&para;</a></h3>
+<p>Esta acción genera la documentación del proyecto combinando:
+- Los <strong>docstrings</strong> de los archivos ubicados en <code>src/</code>.
+- Cualquier documentación adicional definida manualmente en los archivos de la carpeta <code>docs/</code>.</p>
+<p>El resultado es un sitio de documentación actualizado automáticamente.</p>
+<h3 id="proceso_1">Proceso<a class="headerlink" href="#proceso_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Escanea los archivos en <code>src/</code> y procesa los <strong>docstrings</strong>.</li>
+<li>Incluye la documentación manual definida en <code>docs/</code>.</li>
+<li>Genera un sitio estático que puede ser desplegado para consulta.</li>
+</ol>
+<h3 id="activacion_1">Activación<a class="headerlink" href="#activacion_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Trigger:</strong> Push a <code>main</code>.</li>
+</ul>
+<hr />
+<h2 id="3-crear-y-publicar-paquete-en-test-pypi">3. <strong>Crear y publicar paquete en Test PyPI</strong><a class="headerlink" href="#3-crear-y-publicar-paquete-en-test-pypi" title="Permanent link">&para;</a></h2>
+<h3 id="descripcion_2">Descripción<a class="headerlink" href="#descripcion_2" title="Permanent link">&para;</a></h3>
+<p>Esta acción automatiza la creación y despliegue de un paquete Python en <strong>Test PyPI</strong>. El paquete incluye la etiqueta asociada al nombre del release publicado.</p>
+<h3 id="proceso_2">Proceso<a class="headerlink" href="#proceso_2" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Instala las dependencias necesarias para empaquetar el proyecto.</li>
+<li>Crea el paquete del proyecto usando herramientas como <code>setuptools</code> o <code>pdm</code>.</li>
+<li>Publica el paquete en <strong>Test PyPI</strong> con el nombre y la versión obtenidos del release.</li>
+</ol>
+<h3 id="activacion_2">Activación<a class="headerlink" href="#activacion_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Trigger:</strong> Publicación de un release.</li>
+</ul>
+<h3 id="notas">Notas<a class="headerlink" href="#notas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>El nombre del release se utiliza como etiqueta del paquete en Test PyPI.</li>
+<li>Asegúrate de que las credenciales para Test PyPI están configuradas en los <strong>secrets</strong> del repositorio.</li>
+</ul>
+<hr />
+<h2 id="preguntas-frecuentes-faq">Preguntas Frecuentes (FAQ)<a class="headerlink" href="#preguntas-frecuentes-faq" title="Permanent link">&para;</a></h2>
+<h3 id="que-sucede-si-una-accion-falla">¿Qué sucede si una acción falla?<a class="headerlink" href="#que-sucede-si-una-accion-falla" title="Permanent link">&para;</a></h3>
+<p>Si alguna acción falla, revisa los logs generados en GitHub Actions para identificar el problema. Los errores comunes incluyen:
+- Dependencias faltantes.
+- Estilo de código incorrecto (flake8).
+- Tests fallidos.</p>
+<h3 id="como-puedo-personalizar-estas-acciones">¿Cómo puedo personalizar estas acciones?<a class="headerlink" href="#como-puedo-personalizar-estas-acciones" title="Permanent link">&para;</a></h3>
+<p>Edita el archivo <code>workflow.yml</code> correspondiente en el directorio <code>.github/workflows/</code>. Asegúrate de seguir las normas de sintaxis de YAML.</p>
+<h3 id="donde-puedo-ver-la-documentacion-generada">¿Dónde puedo ver la documentación generada?<a class="headerlink" href="#donde-puedo-ver-la-documentacion-generada" title="Permanent link">&para;</a></h3>
+<p>La documentación generada se encuentra en la carpeta <code>site/</code>, que puede ser desplegada en GitHub Pages o cualquier servidor estático.</p>
+<hr />
+<p>¡Gracias por usar estas acciones automatizadas! Si necesitas más ayuda, no dudes en consultar con el equipo o revisar la configuración de los workflows.</p></div>
             </div>
         </div>
 
