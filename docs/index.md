@@ -1,6 +1,6 @@
 # Bienvenido a la Documentación de python-tools
 
-Este proyecto es una herramienta escrita en Python que hace ... 
+Este proyecto realizado por capo-urjc es una herramienta escrita en Python que hace ... 
 Esta documentación está diseñada para ayudarte a entender cómo usar, configurar y desarrollar la herramienta.
 
 ## Contenido
