@@ -12,7 +12,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: ["src"]  # The folder containing your code with docstrings.
+          paths: ["src/capo_tools"]  # The folder containing your code with docstrings.
           options:
             show_source: true
             recurse: true
