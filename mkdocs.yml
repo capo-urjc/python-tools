@@ -5,7 +5,7 @@ site_dir: site  # This site will generate static documentation
 nav:
   - Home: index.md   # main navigation file
   - API: api.md      # File that will be generated with the docstring references.
-  - Develop: develop.md
+  - Manual de usuario: manual_de_usuario.md
 
 plugins:
   - search
