@@ -25,3 +25,12 @@ markdown_extensions:
   - toc:
       permalink: true
   - codehilite
+
+theme:
+  name: material
+  language: es
+  palette:
+    primary: indigo
+  font:
+    text: Roboto
+    code: Fira Code
