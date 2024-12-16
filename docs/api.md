@@ -1,6 +1,6 @@
 # API Reference
 
-::: capo_tools
+::: src.capo_tools
 
 
 

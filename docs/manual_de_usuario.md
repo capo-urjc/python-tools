@@ -5,6 +5,7 @@ Cada acción está diseñada para facilitar tareas clave como la gestión de dep
 
 ---
 
+Python package
 ## 1. **Instalar dependencias, ejecutar linting y tests**
 
 ### Descripción
@@ -23,6 +24,7 @@ Se activa en los siguientes casos:
 
 ---
 
+Generate and Publish Documentation
 ## 2. **Generar documentación automáticamente**
 
 ### Descripción
@@ -42,6 +44,7 @@ El resultado es un sitio de documentación actualizado automáticamente.
 
 ---
 
+Upload Python Package
 ## 3. **Crear y publicar paquete en Test PyPI**
 
 ### Descripción
