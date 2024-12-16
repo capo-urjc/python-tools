@@ -109,6 +109,7 @@
 <p>Este manual describe el funcionamiento de las tres acciones automatizadas disponibles en este proyecto.
 Cada acción está diseñada para facilitar tareas clave como la gestión de dependencias, generación de documentación y despliegue de paquetes.</p>
 <hr />
+<p>Python package</p>
 <h2 id="1-instalar-dependencias-ejecutar-linting-y-tests">1. <strong>Instalar dependencias, ejecutar linting y tests</strong><a class="headerlink" href="#1-instalar-dependencias-ejecutar-linting-y-tests" title="Permanent link">&para;</a></h2>
 <h3 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h3>
 <p>Esta acción instala las dependencias del proyecto, ejecuta análisis de código con <code>flake8</code> y realiza los tests definidos en el proyecto.
@@ -126,6 +127,7 @@ Se activa en los siguientes casos:
 <li><strong>Trigger:</strong> Push a <code>main</code> o Pull Request.</li>
 </ul>
 <hr />
+<p>Generate and Publish Documentation</p>
 <h2 id="2-generar-documentacion-automaticamente">2. <strong>Generar documentación automáticamente</strong><a class="headerlink" href="#2-generar-documentacion-automaticamente" title="Permanent link">&para;</a></h2>
 <h3 id="descripcion_1">Descripción<a class="headerlink" href="#descripcion_1" title="Permanent link">&para;</a></h3>
 <p>Esta acción genera la documentación del proyecto combinando:
@@ -143,6 +145,7 @@ Se activa en los siguientes casos:
 <li><strong>Trigger:</strong> Push a <code>main</code>.</li>
 </ul>
 <hr />
+<p>Upload Python Package</p>
 <h2 id="3-crear-y-publicar-paquete-en-test-pypi">3. <strong>Crear y publicar paquete en Test PyPI</strong><a class="headerlink" href="#3-crear-y-publicar-paquete-en-test-pypi" title="Permanent link">&para;</a></h2>
 <h3 id="descripcion_2">Descripción<a class="headerlink" href="#descripcion_2" title="Permanent link">&para;</a></h3>
 <p>Esta acción automatiza la creación y despliegue de un paquete Python en <strong>Test PyPI</strong>. El paquete incluye la etiqueta asociada al nombre del release publicado.</p>
