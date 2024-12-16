@@ -1,6 +1,6 @@
 # API Reference
 
-::: capo_tools.datasets.CAVE.datasets
+::: capo_tools.datasets.CAVE.dataset
 
 ::: capo_tools.datasets.CAVE.tools
 
