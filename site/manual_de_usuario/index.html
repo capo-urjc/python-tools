@@ -82,12 +82,189 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#manual-de-usuario-uso-de-acciones-de-automatizacion-en-el-proyecto" class="nav-link">Manual de Usuario: Uso de Acciones de Automatización en el Proyecto</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1-acciones-automatizadas-en-github-actions" class="nav-link">1. Acciones Automatizadas en GitHub Actions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-pipeline-de-trabajo-para-los-desarrolladores" class="nav-link">2. Pipeline de Trabajo para los Desarrolladores</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-consideraciones-adicionales" class="nav-link">3. Consideraciones Adicionales</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#resumen-del-pipeline" class="nav-link">Resumen del Pipeline</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-</div>
+<h1 id="manual-de-usuario-uso-de-acciones-de-automatizacion-en-el-proyecto">Manual de Usuario: Uso de Acciones de Automatización en el Proyecto<a class="headerlink" href="#manual-de-usuario-uso-de-acciones-de-automatizacion-en-el-proyecto" title="Permanent link">&para;</a></h1>
+<p>Este manual está diseñado para guiar a los desarrolladores en el uso de las acciones de automatización configuradas en el proyecto.
+Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar nuevas librerías y activar los workflows correctamente.</p>
+<hr />
+<h2 id="1-acciones-automatizadas-en-github-actions">1. Acciones Automatizadas en GitHub Actions<a class="headerlink" href="#1-acciones-automatizadas-en-github-actions" title="Permanent link">&para;</a></h2>
+<p>El proyecto cuenta con tres acciones automatizadas para garantizar la calidad, la documentación y el empaquetado del proyecto.
+Estas acciones están explicadas más detalladamente en la sección "Acciones explicadas".</p>
+<h3 id="11-python-package"><strong>1.1 Python Package</strong><a class="headerlink" href="#11-python-package" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Propósito</strong>: Instala dependencias, ejecuta análisis de calidad con flake8 y corre los tests.</li>
+<li><strong>Trigger</strong>: Push a <code>main</code> o creación de un Pull Request.</li>
+</ul>
+<h3 id="12-generate-and-publish-documentation"><strong>1.2 Generate and Publish Documentation</strong><a class="headerlink" href="#12-generate-and-publish-documentation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Propósito</strong>: Genera documentación actualizada combinando docstrings del código en <code>src/</code> con documentación manual en <code>docs/</code>.</li>
+<li><strong>Trigger</strong>: Push a <code>main</code>.</li>
+</ul>
+<h3 id="13-upload-python-package"><strong>1.3 Upload Python Package</strong><a class="headerlink" href="#13-upload-python-package" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Propósito</strong>: Crea un paquete Python y lo sube a Test PyPI con el nombre del release.</li>
+<li><strong>Trigger</strong>: Publicación de un release en GitHub.</li>
+</ul>
+<hr />
+<h2 id="2-pipeline-de-trabajo-para-los-desarrolladores">2. Pipeline de Trabajo para los Desarrolladores<a class="headerlink" href="#2-pipeline-de-trabajo-para-los-desarrolladores" title="Permanent link">&para;</a></h2>
+<h3 id="paso-1-clonar-el-repositorio"><strong>Paso 1: Clonar el Repositorio</strong><a class="headerlink" href="#paso-1-clonar-el-repositorio" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Clona el repositorio en tu máquina local:</p>
+<p><code>bash
+git clone https://github.com/capo-urjc/python-tools.git</code></p>
+<p>Accede al directorio del proyecto:</p>
+<p><code>bash
+cd proyecto</code></p>
+</li>
+</ol>
+<h3 id="paso-2-desarrollar-la-funcionalidad"><strong>Paso 2: Desarrollar la Funcionalidad</strong><a class="headerlink" href="#paso-2-desarrollar-la-funcionalidad" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Crea una nueva rama para trabajar en tu funcionalidad:</p>
+<p><code>bash
+git checkout -b feature/nueva-funcionalidad</code></p>
+</li>
+<li>
+<p>Realiza las siguientes tareas:</p>
+<ul>
+<li><strong>2.1 Incluir tu código</strong>: Añade el código necesario en los archivos correspondientes del proyecto.</li>
+<li><strong>2.2 Desarrollar los tests unitarios</strong>: Escribe tests para validar la funcionalidad en la carpeta de tests.</li>
+<li><strong>2.3 Documentar el código</strong>: Añade docstrings en formato Google y, si es necesario, actualiza la documentación manual en la carpeta <code>docs/</code>. Debes añadir tus archivos en docs/api.md en este formato "::: src.capo_tools.ejemplo"</li>
+</ul>
+</li>
+</ol>
+<h3 id="paso-3-verificar-el-funcionamiento-correcto"><strong>Paso 3: Verificar el Funcionamiento Correcto</strong><a class="headerlink" href="#paso-3-verificar-el-funcionamiento-correcto" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Asegúrate de que el código pasa las acciones:</p>
+<ul>
+<li>Python package: Revisar el feedback de flake8 para la calidad del código y el feedback de pytest con los tests unitarios. Modificar las restricciones de lint con flake8 si es necesario según tus requisitos, al igual que a la hora de pasar los tests con pypi.</li>
+<li>Upload python package: Revisar que el nombre de versión del tag del realease es correcto con el formato "vX.X.X". Verificar que el paquete se ha construido correctamente con twine. Por último, comprobar que se ha subido correctamente a TestPypi.</li>
+<li>Generate and publish documentation: Comprobar en https://capo-urjc.github.io/python-tools/ que se ha subido la documentación correctamente. La documentación del código está en el apartado API. Para ello tiene que estar en docs/api.md vuestros archivos añadidos.</li>
+</ul>
+</li>
+<li>
+<p>Si has añadido nuevas dependencias:</p>
+<ul>
+<li>Instálalas y agrégalas de forma manual al archivo <code>pyproject.toml</code> en la sección [tool.pdm.dev-dependencies]:</li>
+</ul>
+<p><code>bash
+  pip install nombre-libreria</code></p>
+</li>
+</ol>
+<h3 id="paso-4-crear-el-pull-request"><strong>Paso 4: Crear el Pull Request</strong><a class="headerlink" href="#paso-4-crear-el-pull-request" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Sube tus cambios a tu rama remota:</p>
+<p><code>bash
+git push origin feature/nueva-funcionalidad</code></p>
+</li>
+<li>
+<p>Abre un Pull Request en GitHub contra la rama <code>main</code>.</p>
+</li>
+<li>
+<p>Verifica que las acciones automatizadas en GitHub Actions se ejecuten correctamente:</p>
+<ul>
+<li>La acción <strong>Python Package</strong> debe pasar sin errores.</li>
+<li>La acción <strong>Generate and Publish Documentation</strong> debe generar la documentación correctamente.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="3-consideraciones-adicionales">3. Consideraciones Adicionales<a class="headerlink" href="#3-consideraciones-adicionales" title="Permanent link">&para;</a></h2>
+<h3 id="errores-en-las-acciones"><strong>Errores en las Acciones</strong><a class="headerlink" href="#errores-en-las-acciones" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Si alguna acción falla, revisa los logs en la pestaña <strong>Actions</strong> de GitHub para identificar el problema.</li>
+<li>Soluciona los errores y haz un nuevo push.</li>
+</ul>
+<h3 id="credenciales-para-test-pypi"><strong>Credenciales para Test PyPI</strong><a class="headerlink" href="#credenciales-para-test-pypi" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Asegúrate de que las credenciales están configuradas en los <strong>secrets</strong> del repositorio si necesitas publicar un paquete.</li>
+</ul>
+<hr />
+<h2 id="resumen-del-pipeline">Resumen del Pipeline<a class="headerlink" href="#resumen-del-pipeline" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Clonar el repositorio</strong>:
+    <code>bash
+    git clone https://github.com/usuario/proyecto.git
+    cd proyecto</code></p>
+</li>
+<li>
+<p><strong>Desarrollar la funcionalidad</strong>:</p>
+<ul>
+<li>Crear una rama:</li>
+</ul>
+<p><code>bash
+  git checkout -b feature/nueva-funcionalidad</code></p>
+<ul>
+<li>Incluir el código.</li>
+<li>Añadir tests unitarios.</li>
+<li>Documentar el código con docstrings y actualizar <code>docs/</code> si es necesario.</li>
+</ul>
+</li>
+<li>
+<p><strong>Verificar el funcionamiento correcto</strong>:</p>
+<ul>
+<li>Ejecutar flake8:</li>
+</ul>
+<p><code>bash
+  flake8 src/</code></p>
+<ul>
+<li>Ejecutar los tests:</li>
+</ul>
+<p><code>bash
+  pytest</code></p>
+<ul>
+<li>Generar documentación local:</li>
+</ul>
+<p><code>bash
+  mkdocs serve</code></p>
+</li>
+<li>
+<p><strong>Crear el Pull Request</strong>:</p>
+<ul>
+<li>Subir los cambios:</li>
+</ul>
+<p><code>bash
+  git push origin feature/nueva-funcionalidad</code></p>
+<ul>
+<li>Abrir un Pull Request en GitHub.</li>
+</ul>
+</li>
+<li>
+<p><strong>Confirmar que las acciones de GitHub se ejecuten correctamente</strong>:</p>
+<ul>
+<li>Validar que todas las acciones pasan sin errores.</li>
+</ul>
+</li>
+</ol></div>
             </div>
         </div>
 
