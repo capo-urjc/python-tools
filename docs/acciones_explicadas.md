@@ -11,8 +11,8 @@ Python package
 ### Descripción
 Esta acción instala las dependencias del proyecto, ejecuta análisis de código con `flake8` y realiza los tests definidos en el proyecto.
 Se activa en los siguientes casos:
-- Cuando se hace un **push** a la rama `main`.
-- Cuando se crea un **pull request**.
+- Cuando se hace un **push** a cualquier rama.
+- Cuando se crea un **pull request** a `main`.
 
 ### Proceso
 1. Instala todas las dependencias necesarias definidas en los archivos del proyecto.
@@ -20,7 +20,7 @@ Se activa en los siguientes casos:
 3. Corre los tests definidos, asegurándose de que el proyecto es funcional y no contiene errores.
 
 ### Activación
-- **Trigger:** Push a `main` o Pull Request.
+- **Trigger:** Push a cualquier o Pull Request.
 
 ---
 
@@ -40,7 +40,7 @@ El resultado es un sitio de documentación actualizado automáticamente.
 3. Genera un sitio estático que puede ser desplegado para consulta.
 
 ### Activación
-- **Trigger:** Push a `main`.
+- **Trigger:** Push a `main` o de forma manual en la pestaña `Actions` de **Github**.
 
 ---
 
