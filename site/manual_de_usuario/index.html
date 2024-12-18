@@ -97,7 +97,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#resumen-del-pipeline" class="nav-link">Resumen del Pipeline</a>
+            <li class="nav-item" data-bs-level="2"><a href="#resumen-del-pipeline-con-ejemplo" class="nav-link">Resumen del Pipeline con ejemplo</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -118,12 +118,12 @@ Estas acciones están explicadas más detalladamente en la sección "Acciones ex
 <h3 id="11-python-package"><strong>1.1 Python Package</strong><a class="headerlink" href="#11-python-package" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Propósito</strong>: Instala dependencias, ejecuta análisis de calidad con flake8 y corre los tests.</li>
-<li><strong>Trigger</strong>: Push a <code>main</code> o creación de un Pull Request.</li>
+<li><strong>Trigger</strong>: Push a cualquier rama o creación de un Pull Request.</li>
 </ul>
 <h3 id="12-generate-and-publish-documentation"><strong>1.2 Generate and Publish Documentation</strong><a class="headerlink" href="#12-generate-and-publish-documentation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Propósito</strong>: Genera documentación actualizada combinando docstrings del código en <code>src/</code> con documentación manual en <code>docs/</code>.</li>
-<li><strong>Trigger</strong>: Push a <code>main</code>.</li>
+<li><strong>Trigger</strong>: Push a <code>main</code> o de forma manual.</li>
 </ul>
 <h3 id="13-upload-python-package"><strong>1.3 Upload Python Package</strong><a class="headerlink" href="#13-upload-python-package" title="Permanent link">&para;</a></h3>
 <ul>
@@ -162,20 +162,16 @@ git checkout -b feature/nueva-funcionalidad</code></p>
 <h3 id="paso-3-verificar-el-funcionamiento-correcto"><strong>Paso 3: Verificar el Funcionamiento Correcto</strong><a class="headerlink" href="#paso-3-verificar-el-funcionamiento-correcto" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p>Asegúrate de que el código pasa las acciones:</p>
-<ul>
-<li>Python package: Revisar el feedback de flake8 para la calidad del código y el feedback de pytest con los tests unitarios. Modificar las restricciones de lint con flake8 si es necesario según tus requisitos, al igual que a la hora de pasar los tests con pypi.</li>
-<li>Upload python package: Revisar que el nombre de versión del tag del realease es correcto con el formato "vX.X.X". Verificar que el paquete se ha construido correctamente con twine. Por último, comprobar que se ha subido correctamente a TestPypi.</li>
-<li>Generate and publish documentation: Comprobar en https://capo-urjc.github.io/python-tools/ que se ha subido la documentación correctamente. La documentación del código está en el apartado API. Para ello tiene que estar en docs/api.md vuestros archivos añadidos.</li>
-</ul>
-</li>
-<li>
 <p>Si has añadido nuevas dependencias:</p>
 <ul>
 <li>Instálalas y agrégalas de forma manual al archivo <code>pyproject.toml</code> en la sección [tool.pdm.dev-dependencies]:</li>
 </ul>
 <p><code>bash
-  pip install nombre-libreria</code></p>
+  pip install nombre-libreria</code>
+ 2. Asegúrate de que el código pasa las acciones:
+- Python package: Lo puedes activar haciendo push a tu rama de desarrollo o a cualquier rama. Revisa el feedback de flake8 para la calidad del código y el feedback de pytest con los tests unitarios. Modificar las restricciones de lint con flake8 si es necesario según tus requisitos, al igual que a la hora de pasar los tests con pypi.
+- Upload python package: Solo lo puedes activar publicando un realease, pero puedes hacer pruebas en tu rama. Revisa que el nombre de versión del tag del realease es correcto con el formato "vX.X.X". Verificar que el paquete se ha construido correctamente con twine. Por último, comprobar que se ha subido correctamente a TestPypi.
+- Generate and publish documentation: Lo puedes activar de forma manual es la pestaña actions de Github, importante activarla en tu rama de desarrollo. Se activa automaticamente cuando se hace push a main. Comprueba en https://capo-urjc.github.io/python-tools/ que se ha subido la documentación correctamente. La documentación del código está en el apartado API. Para ello tiene que estar en docs/api.md vuestros archivos añadidos.</p>
 </li>
 </ol>
 <h3 id="paso-4-crear-el-pull-request"><strong>Paso 4: Crear el Pull Request</strong><a class="headerlink" href="#paso-4-crear-el-pull-request" title="Permanent link">&para;</a></h3>
@@ -208,12 +204,12 @@ git push origin feature/nueva-funcionalidad</code></p>
 <li>Asegúrate de que las credenciales están configuradas en los <strong>secrets</strong> del repositorio si necesitas publicar un paquete.</li>
 </ul>
 <hr />
-<h2 id="resumen-del-pipeline">Resumen del Pipeline<a class="headerlink" href="#resumen-del-pipeline" title="Permanent link">&para;</a></h2>
+<h2 id="resumen-del-pipeline-con-ejemplo">Resumen del Pipeline con ejemplo<a class="headerlink" href="#resumen-del-pipeline-con-ejemplo" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p><strong>Clonar el repositorio</strong>:
     <code>bash
-    git clone https://github.com/usuario/proyecto.git
+    git clone https://github.com/capo-urjc/python-tools.git
     cd proyecto</code></p>
 </li>
 <li>
@@ -232,20 +228,9 @@ git push origin feature/nueva-funcionalidad</code></p>
 <li>
 <p><strong>Verificar el funcionamiento correcto</strong>:</p>
 <ul>
-<li>Ejecutar flake8:</li>
+<li>Si has añadido nuevas dependencias, instálalas y agrégalas en <code>pyproject.toml</code></li>
+<li>Asegúrate de que el código pasa las acciones</li>
 </ul>
-<p><code>bash
-  flake8 src/</code></p>
-<ul>
-<li>Ejecutar los tests:</li>
-</ul>
-<p><code>bash
-  pytest</code></p>
-<ul>
-<li>Generar documentación local:</li>
-</ul>
-<p><code>bash
-  mkdocs serve</code></p>
 </li>
 <li>
 <p><strong>Crear el Pull Request</strong>:</p>

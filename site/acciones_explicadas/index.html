@@ -117,8 +117,8 @@ Cada acción está diseñada para facilitar tareas clave como la gestión de dep
 <h3 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h3>
 <p>Esta acción instala las dependencias del proyecto, ejecuta análisis de código con <code>flake8</code> y realiza los tests definidos en el proyecto.
 Se activa en los siguientes casos:
-- Cuando se hace un <strong>push</strong> a la rama <code>main</code>.
-- Cuando se crea un <strong>pull request</strong>.</p>
+- Cuando se hace un <strong>push</strong> a cualquier rama.
+- Cuando se crea un <strong>pull request</strong> a <code>main</code>.</p>
 <h3 id="proceso">Proceso<a class="headerlink" href="#proceso" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Instala todas las dependencias necesarias definidas en los archivos del proyecto.</li>
@@ -127,7 +127,7 @@ Se activa en los siguientes casos:
 </ol>
 <h3 id="activacion">Activación<a class="headerlink" href="#activacion" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Trigger:</strong> Push a <code>main</code> o Pull Request.</li>
+<li><strong>Trigger:</strong> Push a cualquier o Pull Request.</li>
 </ul>
 <hr />
 <p>Generate and Publish Documentation</p>
@@ -145,7 +145,7 @@ Se activa en los siguientes casos:
 </ol>
 <h3 id="activacion_1">Activación<a class="headerlink" href="#activacion_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Trigger:</strong> Push a <code>main</code>.</li>
+<li><strong>Trigger:</strong> Push a <code>main</code> o de forma manual en la pestaña <code>Actions</code> de <strong>Github</strong>.</li>
 </ul>
 <hr />
 <p>Upload Python Package</p>
