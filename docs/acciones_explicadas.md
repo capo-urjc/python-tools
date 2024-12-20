@@ -20,7 +20,7 @@ Se activa en los siguientes casos:
 3. Corre los tests definidos, asegurándose de que el proyecto es funcional y no contiene errores.
 
 ### Activación
-- **Trigger:** Push a cualquier o Pull Request.
+- **Trigger:** Push a cualquier rama o Pull Request.
 
 ---
 
