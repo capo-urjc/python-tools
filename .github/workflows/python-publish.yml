@@ -6,13 +6,14 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Continuous Integration
+name: Upload Python Package
 
 on:
-  workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   deploy:
@@ -20,14 +21,52 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Set up PDM
       uses: pdm-project/setup-pdm@v4
-    
-    - name: Install dependencies
-      run: pdm install
 
-    - name: Build docs
-      run: pdm run duty docs
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pdm install -G dev
+
+
+    # Validate version tag
+    - name: Validate and extract version from tag
+      id: extract_version
+      run: |
+        TAG_NAME="${{ github.event.release.tag_name }}"
+        if [[ ! "$TAG_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "Error: Tag name is not in the correct format (vX.X.X)."
+          exit 1
+        fi
+        VERSION=${TAG_NAME#v} # Elimina la 'v' al inicio
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Extracted version: $VERSION"
+
+    - name: Generate __version__.py
+      run: |
+        VERSION="${{ github.event.release.tag_name }}"
+        echo "__version__ = '${VERSION#v}'" > src/capo_tools/__version__.py
+
+      # Compiling the Python package
+    - name: Build package
+      run: |
+        python -m pip install --upgrade build twine
+        python -m build
+
+    # Ensure Twine is installed
+    - name: Install Twine
+      run: pdm add --dev twine
+
+    # Publish package to TestPyPI using Twine
+    # Here we use my credentials
+    - name: Publish package to TestPyPI
+      env:
+
+        TWINE_USERNAME: __token__  # TestPyPI user
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}  # TestPyPI password
+      run: |
+        twine upload --repository-url https://test.pypi.org/legacy/ --verbose dist/* # Upload the files to TestPyPI
+

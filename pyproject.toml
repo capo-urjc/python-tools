@@ -22,6 +22,9 @@ dependencies = [
     "torch>=2.0.1",
     "torchvision>=0.15.2",
     "torchaudio>=2.0.2",
+    "imageio>=2.34.0",
+    "tqdm>=4.66.2",
+    "wget>=3.2",
 ]
 dynamic = ["version"]
 
@@ -43,4 +46,9 @@ dev = [
     "mkdocs-git-committers-plugin-2>=2.2.3",
     "pymdown-extensions>=10.7",
     "duty>=1.2.0",
+    "flake8>=6.1.0",
+    "mkdocs>=1.5.2",
+    "mkdocs-material>=9.2.0",
+    "mkdocstrings>=0.18.1",
+    "pandoc"
 ]

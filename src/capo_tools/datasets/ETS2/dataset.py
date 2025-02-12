@@ -40,8 +40,10 @@ class ETS2Dataset(Dataset):
             is_train (bool): Whether the dataset is for training or not
             transform (callable): Optional transform to be applied to the sample
         """
+    def __init__(self, data_path, indexes, image_type: str = 'bmp', is_train: bool = False, transform=None):
         super(ETS2Dataset, self).__init__()
         self.data_path = data_path
+        self.image_type = image_type
         self.is_train = is_train
         self.data = get_data(self.data_path)
         self.indexes = indexes if indexes is not None else list(range(len(self.data)))
@@ -57,7 +59,7 @@ class ETS2Dataset(Dataset):
         index = self.indexes[item]
         row = self.data.iloc[index]
         file_path = os.path.join(self.data_path, row['session'], row['capture'])
-        image = Image.open(f"{file_path}.jpg")
+        image = Image.open(f"{file_path}.{self.image_type}")
 
         depth_file = read_depth_file(f"{file_path}.depth.raw")
         header = depth_file.header

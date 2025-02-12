@@ -53,6 +53,8 @@ plugins:
       repository: capo-urjc/python-tools
 
 nav:
-    - Home: index.md
-    - API reference:
-      - capo-tools: reference/
+  - Home: index.md
+  - API reference:
+    - capo-tools: reference/
+  - Acciones explicadas: acciones_explicadas.md
+  - Manual de usuario: manual_de_usuario.md
