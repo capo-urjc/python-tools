@@ -9,7 +9,9 @@ on:
       - main
   push:
     branches:
-      - '*' #All branches
+      - '**'  #All branches
+    paths-ignore:
+      - '.github/**'  #Avoid execution of changes in workflows
   
 jobs:
   build:
