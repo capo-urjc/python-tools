@@ -4,8 +4,11 @@
 [metadata]
 groups = ["default", "dev"]
 strategy = ["cross_platform", "inherit_metadata"]
-lock_version = "4.4.1"
-content_hash = "sha256:6277997773ba8baf911edbed1fc79bf316554ba8c2297f057a0363ab04913f57"
+lock_version = "4.5.0"
+content_hash = "sha256:c782f35311574621da2b0fcdd4579daff0bf322f056e9b240d3627fcd2a61ec4"
+
+[[metadata.targets]]
+requires_python = ">=3.10"
 
 [[package]]
 name = "ansimarkup"
@@ -26,6 +29,9 @@ version = "2.14.0"
 requires_python = ">=3.7"
 summary = "Internationalization utilities"
 groups = ["dev"]
+dependencies = [
+    "pytz>=2015.7; python_version < \"3.9\"",
+]
 files = [
     {file = "Babel-2.14.0-py3-none-any.whl", hash = "sha256:efb1a25b7118e67ce3a259bed20545c29cb68be8ad2c784c83689981b7a57287"},
     {file = "Babel-2.14.0.tar.gz", hash = "sha256:6919867db036398ba21eb5c7a0f6b28ab8cbc3ae7a73a44ebe34ae74a4e7d363"},
@@ -152,10 +158,43 @@ summary = "Composable command line interface toolkit"
 groups = ["dev"]
 dependencies = [
     "colorama; platform_system == \"Windows\"",
+    "importlib-metadata; python_version < \"3.8\"",
 ]
 files = [
     {file = "click-8.1.7-py3-none-any.whl", hash = "sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28"},
     {file = "click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de"},
+]
+
+[[package]]
+name = "cmake"
+version = "3.31.4"
+requires_python = ">=3.7"
+summary = "CMake is an open-source, cross-platform family of tools designed to build, test and package software"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "importlib-metadata>=1.4; python_version < \"3.8\"",
+]
+files = [
+    {file = "cmake-3.31.4-py3-none-macosx_10_10_universal2.whl", hash = "sha256:fc048b4b70facd16699a43c737f6782b4eff56e8e6093090db5979532d9db0f6"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:2a37be93534df04513f0845492d71bc80899c3f87b77e3b01c95aff1a7fc9bde"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:c9f5f8289c5e7bd2ed654cbac164021fa7723064fee0443a2f0068bc08413d81"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:926d91cae2ba7d2f3df857d0fc066bdac4f3904bf5c95e99b60435e85aabedb4"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:929a8d8d289d69e43784661748ddd08933ce1ec5db8f9bcfce6ee817a48f8787"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:b463efdf5b92f3b290235aa9f8da092b3dac19b7636c563fd156022dab580649"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:225d9a643b0b60ffce0399ff0cabd7a4820e0dbcb794e97d3aacfcf7c0589ae6"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:89143a5e2a5916061f2cfc5012e9fe6281aaf7c0dae7930bdc68d105d22ddc39"},
+    {file = "cmake-3.31.4-py3-none-manylinux_2_31_armv7l.whl", hash = "sha256:f96127bf663168accd29d5a50ee68ea80f26bcd37f96c7a14ef2378781f19936"},
+    {file = "cmake-3.31.4-py3-none-musllinux_1_1_aarch64.whl", hash = "sha256:25c5094394f0cee21130b5678e5b4552f72470e266df6d6fb1d5c505100f0eaa"},
+    {file = "cmake-3.31.4-py3-none-musllinux_1_1_i686.whl", hash = "sha256:466c9295af440bb4a47cc5e1af10576cf2227620528afd0fd0b3effa1d513b49"},
+    {file = "cmake-3.31.4-py3-none-musllinux_1_1_ppc64le.whl", hash = "sha256:f6af3b83a1b1fc1d990d18b6a566ee9c95c0393f986c6df15f2505dda8ad1bcc"},
+    {file = "cmake-3.31.4-py3-none-musllinux_1_1_s390x.whl", hash = "sha256:23781e17563693a68b0cef85749746894b8a61488e56e96fc6649b73652e8236"},
+    {file = "cmake-3.31.4-py3-none-musllinux_1_1_x86_64.whl", hash = "sha256:838a388b559137f3654d8cf30f62bbdec10f8d1c3624f0d289614d33cdf4fba1"},
+    {file = "cmake-3.31.4-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:a6a3b0b9557f41c955a6b25c94205f2ca9c3a46edca809ad87507c5ef6bc4274"},
+    {file = "cmake-3.31.4-py3-none-win32.whl", hash = "sha256:d378c9e58eac906bddafd673c7571262dcd5a9946bb1e8f9e3902572a8fa95ca"},
+    {file = "cmake-3.31.4-py3-none-win_amd64.whl", hash = "sha256:20be7cdb41903edf85e8a498c4beff8d6854acbb087abfb07c362c738bdf0018"},
+    {file = "cmake-3.31.4-py3-none-win_arm64.whl", hash = "sha256:9479a9255197c49e135df039d8484c69aa63158a06ae9c2d0eb939da2f0f7dff"},
+    {file = "cmake-3.31.4.tar.gz", hash = "sha256:a6ac2242e0b16ad7d94c9f8572d6f232e6169747be50e5cdf497f206c4819ce1"},
 ]
 
 [[package]]
@@ -359,6 +398,7 @@ dependencies = [
     "ansimarkup~=1.4",
     "jinja2<4,>=2.11",
     "ptyprocess~=0.6; sys_platform != \"win32\"",
+    "typing-extensions>=4.1; python_version < \"3.10\"",
 ]
 files = [
     {file = "failprint-1.0.2-py3-none-any.whl", hash = "sha256:111eb0b7f0ef8af4dc2826f57d8c99b3e63cde42f6f9a7b7f86f3f8d69cf4056"},
@@ -446,6 +486,7 @@ summary = "GitPython is a Python library used to interact with Git repositories"
 groups = ["dev"]
 dependencies = [
     "gitdb<5,>=4.0.1",
+    "typing-extensions>=3.7.4.3; python_version < \"3.8\"",
 ]
 files = [
     {file = "GitPython-3.1.41-py3-none-any.whl", hash = "sha256:c36b6634d069b3f719610175020a9aed919421c87552185b085e04fbbdb10b7c"},
@@ -484,6 +525,7 @@ requires_python = ">=3.8"
 summary = "Read metadata from Python packages"
 groups = ["dev"]
 dependencies = [
+    "typing-extensions>=3.6.4; python_version < \"3.8\"",
     "zipp>=0.5",
 ]
 files = [
@@ -551,6 +593,7 @@ groups = ["dev"]
 dependencies = [
     "SecretStorage>=3.2; sys_platform == \"linux\"",
     "importlib-metadata>=4.11.4; python_version < \"3.12\"",
+    "importlib-resources; python_version < \"3.9\"",
     "jaraco-classes",
     "jeepney>=0.4.2; sys_platform == \"linux\"",
     "pywin32-ctypes>=0.2.0; sys_platform == \"win32\"",
@@ -566,6 +609,9 @@ version = "1.4.5"
 requires_python = ">=3.7"
 summary = "A fast implementation of the Cassowary constraint solver"
 groups = ["default"]
+dependencies = [
+    "typing-extensions; python_version < \"3.8\"",
+]
 files = [
     {file = "kiwisolver-1.4.5-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:05703cf211d585109fcd72207a31bb170a0f22144d68298dc5e61b3c946518af"},
     {file = "kiwisolver-1.4.5-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:146d14bebb7f1dc4d5fbf74f8a6cb15ac42baadee8912eb84ac0b3b2a3dc6ac3"},
@@ -631,11 +677,25 @@ files = [
 ]
 
 [[package]]
+name = "lit"
+version = "18.1.8"
+summary = "A Software Testing Tool"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+files = [
+    {file = "lit-18.1.8-py3-none-any.whl", hash = "sha256:a873ff7acd76e746368da32eb7355625e2e55a2baaab884c9cc130f2ee0300f7"},
+    {file = "lit-18.1.8.tar.gz", hash = "sha256:47c174a186941ae830f04ded76a3444600be67d5e5fb8282c3783fba671c4edb"},
+]
+
+[[package]]
 name = "markdown"
 version = "3.5.2"
 requires_python = ">=3.8"
 summary = "Python implementation of John Gruber's Markdown."
 groups = ["dev"]
+dependencies = [
+    "importlib-metadata>=4.4; python_version < \"3.10\"",
+]
 files = [
     {file = "Markdown-3.5.2-py3-none-any.whl", hash = "sha256:d43323865d89fc0cb9b20c75fc8ad313af307cc087e84b657d9eec768eddeadd"},
     {file = "Markdown-3.5.2.tar.gz", hash = "sha256:e1ac7b3dc550ee80e602e71c1d168002f062e49f1b11e26a36264dafd4df2ef8"},
@@ -705,6 +765,7 @@ dependencies = [
     "contourpy>=1.0.1",
     "cycler>=0.10",
     "fonttools>=4.22.0",
+    "importlib-resources>=3.2.0; python_version < \"3.10\"",
     "kiwisolver>=1.3.1",
     "numpy<2,>=1.21",
     "packaging>=20.0",
@@ -769,6 +830,7 @@ dependencies = [
     "click>=7.0",
     "colorama>=0.4; platform_system == \"Windows\"",
     "ghp-import>=1.0",
+    "importlib-metadata>=4.3; python_version < \"3.10\"",
     "jinja2>=2.11.1",
     "markdown>=3.2.1",
     "markupsafe>=2.0.1",
@@ -778,6 +840,7 @@ dependencies = [
     "platformdirs>=2.2.0",
     "pyyaml-env-tag>=0.1",
     "pyyaml>=5.1",
+    "typing-extensions>=3.10; python_version < \"3.8\"",
     "watchdog>=2.0",
 ]
 files = [
@@ -890,10 +953,12 @@ dependencies = [
     "Markdown>=3.3",
     "MarkupSafe>=1.1",
     "click>=7.0",
+    "importlib-metadata>=4.6; python_version < \"3.10\"",
     "mkdocs-autorefs>=0.3.1",
     "mkdocs>=1.4",
     "platformdirs>=2.2.0",
     "pymdown-extensions>=6.3",
+    "typing-extensions>=4.1; python_version < \"3.10\"",
 ]
 files = [
     {file = "mkdocstrings-0.24.0-py3-none-any.whl", hash = "sha256:f4908560c10f587326d8f5165d1908817b2e280bbf707607f601c996366a2264"},
@@ -1006,6 +1071,171 @@ files = [
     {file = "numpy-1.26.4-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:95a7476c59002f2f6c590b9b7b998306fba6a5aa646b1e22ddfeaf8f78c3a29c"},
     {file = "numpy-1.26.4-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:7e50d0a0cc3189f9cb0aeb3a6a6af18c16f59f004b866cd2be1c14b36134a4a0"},
     {file = "numpy-1.26.4.tar.gz", hash = "sha256:2a02aba9ed12e4ac4eb3ea9421c420301a0c6460d9830d74a9df87efa4912010"},
+]
+
+[[package]]
+name = "nvidia-cublas-cu11"
+version = "11.10.3.66"
+requires_python = ">=3"
+summary = "CUBLAS native runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "setuptools",
+    "wheel",
+]
+files = [
+    {file = "nvidia_cublas_cu11-11.10.3.66-py3-none-manylinux1_x86_64.whl", hash = "sha256:d32e4d75f94ddfb93ea0a5dda08389bcc65d8916a25cb9f37ac89edaeed3bded"},
+    {file = "nvidia_cublas_cu11-11.10.3.66-py3-none-win_amd64.whl", hash = "sha256:8ac17ba6ade3ed56ab898a036f9ae0756f1e81052a317bf98f8c6d18dc3ae49e"},
+]
+
+[[package]]
+name = "nvidia-cuda-cupti-cu11"
+version = "11.7.101"
+requires_python = ">=3"
+summary = "CUDA profiling tools runtime libs."
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "setuptools",
+    "wheel",
+]
+files = [
+    {file = "nvidia_cuda_cupti_cu11-11.7.101-py3-none-manylinux1_x86_64.whl", hash = "sha256:e0cfd9854e1f2edaa36ca20d21cd0bdd5dcfca4e3b9e130a082e05b33b6c5895"},
+    {file = "nvidia_cuda_cupti_cu11-11.7.101-py3-none-win_amd64.whl", hash = "sha256:7cc5b8f91ae5e1389c3c0ad8866b3b016a175e827ea8f162a672990a402ab2b0"},
+]
+
+[[package]]
+name = "nvidia-cuda-nvrtc-cu11"
+version = "11.7.99"
+requires_python = ">=3"
+summary = "NVRTC native runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+files = [
+    {file = "nvidia_cuda_nvrtc_cu11-11.7.99-2-py3-none-manylinux1_x86_64.whl", hash = "sha256:9f1562822ea264b7e34ed5930567e89242d266448e936b85bc97a3370feabb03"},
+    {file = "nvidia_cuda_nvrtc_cu11-11.7.99-py3-none-manylinux1_x86_64.whl", hash = "sha256:f7d9610d9b7c331fa0da2d1b2858a4a8315e6d49765091d28711c8946e7425e7"},
+    {file = "nvidia_cuda_nvrtc_cu11-11.7.99-py3-none-win_amd64.whl", hash = "sha256:f2effeb1309bdd1b3854fc9b17eaf997808f8b25968ce0c7070945c4265d64a3"},
+]
+
+[[package]]
+name = "nvidia-cuda-runtime-cu11"
+version = "11.7.99"
+requires_python = ">=3"
+summary = "CUDA Runtime native Libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "setuptools",
+    "wheel",
+]
+files = [
+    {file = "nvidia_cuda_runtime_cu11-11.7.99-py3-none-manylinux1_x86_64.whl", hash = "sha256:cc768314ae58d2641f07eac350f40f99dcb35719c4faff4bc458a7cd2b119e31"},
+    {file = "nvidia_cuda_runtime_cu11-11.7.99-py3-none-win_amd64.whl", hash = "sha256:bc77fa59a7679310df9d5c70ab13c4e34c64ae2124dd1efd7e5474b71be125c7"},
+]
+
+[[package]]
+name = "nvidia-cudnn-cu11"
+version = "8.5.0.96"
+requires_python = ">=3"
+summary = "cuDNN runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "nvidia-cublas-cu11",
+]
+files = [
+    {file = "nvidia_cudnn_cu11-8.5.0.96-2-py3-none-manylinux1_x86_64.whl", hash = "sha256:402f40adfc6f418f9dae9ab402e773cfed9beae52333f6d86ae3107a1b9527e7"},
+    {file = "nvidia_cudnn_cu11-8.5.0.96-py3-none-manylinux1_x86_64.whl", hash = "sha256:71f8111eb830879ff2836db3cccf03bbd735df9b0d17cd93761732ac50a8a108"},
+]
+
+[[package]]
+name = "nvidia-cufft-cu11"
+version = "10.9.0.58"
+requires_python = ">=3"
+summary = "CUFFT native runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+files = [
+    {file = "nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux1_x86_64.whl", hash = "sha256:222f9da70c80384632fd6035e4c3f16762d64ea7a843829cb278f98b3cb7dd81"},
+    {file = "nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux2014_aarch64.whl", hash = "sha256:34b7315104e615b230dc3c2d1861f13bff9ec465c5d3b4bb65b4986d03a1d8d4"},
+    {file = "nvidia_cufft_cu11-10.9.0.58-py3-none-manylinux2014_x86_64.whl", hash = "sha256:e21037259995243cc370dd63c430d77ae9280bedb68d5b5a18226bfc92e5d748"},
+    {file = "nvidia_cufft_cu11-10.9.0.58-py3-none-win_amd64.whl", hash = "sha256:c4d316f17c745ec9c728e30409612eaf77a8404c3733cdf6c9c1569634d1ca03"},
+]
+
+[[package]]
+name = "nvidia-curand-cu11"
+version = "10.2.10.91"
+requires_python = ">=3"
+summary = "CURAND native runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "setuptools",
+    "wheel",
+]
+files = [
+    {file = "nvidia_curand_cu11-10.2.10.91-py3-none-manylinux1_x86_64.whl", hash = "sha256:eecb269c970fa599a2660c9232fa46aaccbf90d9170b96c462e13bcb4d129e2c"},
+    {file = "nvidia_curand_cu11-10.2.10.91-py3-none-win_amd64.whl", hash = "sha256:f742052af0e1e75523bde18895a9ed016ecf1e5aa0ecddfcc3658fd11a1ff417"},
+]
+
+[[package]]
+name = "nvidia-cusolver-cu11"
+version = "11.4.0.1"
+requires_python = ">=3"
+summary = "CUDA solver native runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "nvidia-cublas-cu11",
+]
+files = [
+    {file = "nvidia_cusolver_cu11-11.4.0.1-2-py3-none-manylinux1_x86_64.whl", hash = "sha256:72fa7261d755ed55c0074960df5904b65e2326f7adce364cbe4945063c1be412"},
+    {file = "nvidia_cusolver_cu11-11.4.0.1-py3-none-manylinux1_x86_64.whl", hash = "sha256:700b781bfefd57d161443aff9ace1878584b93e0b2cfef3d6e9296d96febbf99"},
+    {file = "nvidia_cusolver_cu11-11.4.0.1-py3-none-win_amd64.whl", hash = "sha256:00f70b256add65f8c1eb3b6a65308795a93e7740f6df9e273eccbba770d370c4"},
+]
+
+[[package]]
+name = "nvidia-cusparse-cu11"
+version = "11.7.4.91"
+requires_python = ">=3"
+summary = "CUSPARSE native runtime libraries"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "setuptools",
+    "wheel",
+]
+files = [
+    {file = "nvidia_cusparse_cu11-11.7.4.91-py3-none-manylinux1_x86_64.whl", hash = "sha256:a3389de714db63321aa11fbec3919271f415ef19fda58aed7f2ede488c32733d"},
+    {file = "nvidia_cusparse_cu11-11.7.4.91-py3-none-win_amd64.whl", hash = "sha256:304a01599534f5186a8ed1c3756879282c72c118bc77dd890dc1ff868cad25b9"},
+]
+
+[[package]]
+name = "nvidia-nccl-cu11"
+version = "2.14.3"
+requires_python = ">=3"
+summary = "NVIDIA Collective Communication Library (NCCL) Runtime"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+files = [
+    {file = "nvidia_nccl_cu11-2.14.3-py3-none-manylinux1_x86_64.whl", hash = "sha256:5e5534257d1284b8e825bc3a182c6f06acd6eb405e9f89d49340e98cd8f136eb"},
+]
+
+[[package]]
+name = "nvidia-nvtx-cu11"
+version = "11.7.91"
+requires_python = ">=3"
+summary = "NVIDIA Tools Extension"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "setuptools",
+    "wheel",
+]
+files = [
+    {file = "nvidia_nvtx_cu11-11.7.91-py3-none-manylinux1_x86_64.whl", hash = "sha256:b22c64eee426a62fc00952b507d6d29cf62b4c9df7a480fcc417e540e05fd5ac"},
+    {file = "nvidia_nvtx_cu11-11.7.91-py3-none-win_amd64.whl", hash = "sha256:dfd7fcb2a91742513027d63a26b757f38dd8b07fecac282c4d132a9d373ff064"},
 ]
 
 [[package]]
@@ -1463,6 +1693,7 @@ groups = ["dev"]
 dependencies = [
     "markdown-it-py>=2.2.0",
     "pygments<3.0.0,>=2.13.0",
+    "typing-extensions<5.0,>=4.0.0; python_version < \"3.9\"",
 ]
 files = [
     {file = "rich-13.7.0-py3-none-any.whl", hash = "sha256:6da14c108c4866ee9520bbffa71f6fe3962e193b7da68720583850cd4548e235"},
@@ -1483,6 +1714,18 @@ dependencies = [
 files = [
     {file = "SecretStorage-3.3.3-py3-none-any.whl", hash = "sha256:f356e6628222568e3af06f2eba8df495efa13b3b63081dafd4f7d9a7b7bc9f99"},
     {file = "SecretStorage-3.3.3.tar.gz", hash = "sha256:2403533ef369eca6d2ba81718576c5e0f564d5cca1b58f73a8b23e7d4eeebd77"},
+]
+
+[[package]]
+name = "setuptools"
+version = "75.8.0"
+requires_python = ">=3.9"
+summary = "Easily download, build, install, upgrade, and uninstall Python packages"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+files = [
+    {file = "setuptools-75.8.0-py3-none-any.whl", hash = "sha256:e3982f444617239225d675215d51f6ba05f845d4eec313da4418fdbb56fb27e3"},
+    {file = "setuptools-75.8.0.tar.gz", hash = "sha256:c5afc8f407c626b8313a86e10311dd3f661c6cd9c09d4bf8c15c0e11f9f2b0e6"},
 ]
 
 [[package]]
@@ -1543,7 +1786,19 @@ dependencies = [
     "filelock",
     "jinja2",
     "networkx",
+    "nvidia-cublas-cu11==11.10.3.66; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cuda-cupti-cu11==11.7.101; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cuda-nvrtc-cu11==11.7.99; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cuda-runtime-cu11==11.7.99; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cudnn-cu11==8.5.0.96; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cufft-cu11==10.9.0.58; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-curand-cu11==10.2.10.91; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cusolver-cu11==11.4.0.1; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-cusparse-cu11==11.7.4.91; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-nccl-cu11==2.14.3; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
+    "nvidia-nvtx-cu11==11.7.91; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
     "sympy",
+    "triton==2.0.0; platform_system == \"Linux\" and platform_machine == \"x86_64\"",
     "typing-extensions",
 ]
 files = [
@@ -1603,6 +1858,23 @@ files = [
     {file = "torchvision-0.15.2-cp311-cp311-manylinux1_x86_64.whl", hash = "sha256:012ad25cfd9019ff9b0714a168727e3845029be1af82296ff1e1482931fa4b80"},
     {file = "torchvision-0.15.2-cp311-cp311-manylinux2014_aarch64.whl", hash = "sha256:b02a7ffeaa61448737f39a4210b8ee60234bda0515a0c0d8562f884454105b0f"},
     {file = "torchvision-0.15.2-cp311-cp311-win_amd64.whl", hash = "sha256:10be76ceded48329d0a0355ac33da131ee3993ff6c125e4a02ab34b5baa2472c"},
+]
+
+[[package]]
+name = "triton"
+version = "2.0.0"
+summary = "A language and compiler for custom Deep Learning operations"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+dependencies = [
+    "cmake",
+    "filelock",
+    "lit",
+    "torch",
+]
+files = [
+    {file = "triton-2.0.0-1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:38806ee9663f4b0f7cd64790e96c579374089e58f49aac4a6608121aa55e2505"},
+    {file = "triton-2.0.0-1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:226941c7b8595219ddef59a1fdb821e8c744289a132415ddd584facedeb475b1"},
 ]
 
 [[package]]
@@ -1690,6 +1962,18 @@ files = [
     {file = "watchdog-4.0.0-py3-none-win_amd64.whl", hash = "sha256:f970663fa4f7e80401a7b0cbeec00fa801bf0287d93d48368fc3e6fa32716245"},
     {file = "watchdog-4.0.0-py3-none-win_ia64.whl", hash = "sha256:9a03e16e55465177d416699331b0f3564138f1807ecc5f2de9d55d8f188d08c7"},
     {file = "watchdog-4.0.0.tar.gz", hash = "sha256:e3e7065cbdabe6183ab82199d7a4f6b3ba0a438c5a512a68559846ccb76a78ec"},
+]
+
+[[package]]
+name = "wheel"
+version = "0.45.1"
+requires_python = ">=3.8"
+summary = "A built-package format for Python"
+groups = ["default"]
+marker = "platform_system == \"Linux\" and platform_machine == \"x86_64\""
+files = [
+    {file = "wheel-0.45.1-py3-none-any.whl", hash = "sha256:708e7481cc80179af0e556bbf0cc00b8444c7321e2700b8d8580231d13017248"},
+    {file = "wheel-0.45.1.tar.gz", hash = "sha256:661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729"},
 ]
 
 [[package]]
