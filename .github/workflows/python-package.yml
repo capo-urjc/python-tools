@@ -42,4 +42,4 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pdm run pytest
+         (cd tests && pdm run pytest)
