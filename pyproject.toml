@@ -36,4 +36,9 @@ dev = [
     "twine>=4.0.2",
     "pytest>=8.0.0",
     "coverage>=7.4.1",
+    "flake8>=6.1.0",
+    "mkdocs>=1.5.2",
+    "mkdocs-material>=9.2.0",
+    "mkdocstrings>=0.18.1",
+    "pandoc"
 ]

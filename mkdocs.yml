@@ -1,0 +1,29 @@
+site_name: "Documentación del Proyecto"
+docs_dir: docs
+site_dir: site  # This site will generate static documentation
+
+nav:
+  - Home: index.md   # main navigation file
+  - API: api.md      # File that will be generated with the docstring references.
+  - Acciones explicadas: acciones_explicadas.md
+  - Manual de usuario: manual_de_usuario.md
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          #paths: ["src/capo_tools"]  # The folder containing your code with docstrings.
+          options:
+            show_source: true
+            recurse: true
+          selection:
+            docstring_style: google
+
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - codehilite
+
