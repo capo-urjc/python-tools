@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="sdkName" value="Python 3.10 (capo-torch)" />
+    <option name="sdkName" value="Python 3.10 (capo-libs)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 virtualenv at C:\Users\david.maria\Documents\python-projects\capo-libs\venv" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (capo-libs)" project-jdk-type="Python SDK" />
 </project>
