@@ -9,7 +9,8 @@ on:
       - main
   push:
     branches:
-      - '*' #All branches
+      - '*'  #All branches
+
   
 jobs:
   build:
