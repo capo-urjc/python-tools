@@ -60,6 +60,7 @@ Estas acciones están explicadas más detalladamente en la sección "Acciones ex
       ```bash
       pip install nombre-libreria
       ```
+      
  2. Asegúrate de que el código pasa las acciones:
     - Python package: Lo puedes activar haciendo push a tu rama de desarrollo o a cualquier rama. Revisa el feedback de flake8 para la calidad del código y el feedback de pytest con los tests unitarios. Modificar las restricciones de lint con flake8 si es necesario según tus requisitos, al igual que a la hora de pasar los tests con pypi.
     - Upload python package: Solo lo puedes activar publicando un realease, pero puedes hacer pruebas en tu rama. Revisa que el nombre de versión del tag del realease es correcto con el formato "vX.X.X". Verificar que el paquete se ha construido correctamente con twine. Por último, comprobar que se ha subido correctamente a TestPypi.
