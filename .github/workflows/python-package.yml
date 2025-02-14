@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize  # Only runs if a PR is opened or updated
   push:
     branches:
       - '*'  #All branches
