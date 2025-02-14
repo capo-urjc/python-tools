@@ -13,6 +13,8 @@ on:
   push:
     branches:
       - '*'  #All branches
+    paths-ignore:  # to ignore specific files
+      - '.github/**'
 
   
 jobs:
