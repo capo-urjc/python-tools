@@ -7,14 +7,21 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize  # Only runs if a PR is opened or updated
   push:
     branches:
       - '*'  #All branches
+    paths-ignore:  # to ignore specific files
+      - '.github/**'
 
   
 jobs:
   build:
-
+    if: >
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'push' && github.ref != 'refs/heads/main' && !contains(github.event.head_commit.message, '[skip ci]'))
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
