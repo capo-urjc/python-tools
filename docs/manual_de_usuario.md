@@ -1,107 +1,20 @@
-# Manual de Usuario: Uso de Acciones de Automatización en el Proyecto
+# Manual de usuario: Como colaborar en el proyecto
 
-Este manual está diseñado para guiar a los desarrolladores en el uso de las acciones de automatización configuradas en el proyecto.
+Este manual está diseñado para guiar a los colaboradores en el flujo de trabajo del proyecto.
 Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar nuevas librerías y activar los workflows correctamente.
 
 ---
-
-## 1. Acciones Automatizadas en GitHub Actions
-
-El proyecto cuenta con tres acciones automatizadas para garantizar la calidad, la documentación y el empaquetado del proyecto.
-Estas acciones están explicadas más detalladamente en la sección "Acciones explicadas".
-
-### **1.1 Python Package**
-- **Propósito**: Instala dependencias, ejecuta análisis de calidad con flake8 y corre los tests.
-- **Trigger**: Push a cualquier rama o creación de un Pull Request.
-
-### **1.2 Generate and Publish Documentation**
-- **Propósito**: Genera documentación actualizada combinando docstrings del código en `src/` con documentación manual en `docs/`.
-- **Trigger**: Push a `main` o de forma manual.
-
-### **1.3 Upload Python Package**
-- **Propósito**: Crea un paquete Python y lo sube a Test PyPI con el nombre del release.
-- **Trigger**: Publicación de un release en GitHub.
-
----
-
-## 2. Pipeline de Trabajo para los Desarrolladores
-
-### **Paso 1: Clonar el Repositorio**
-1. Clona el repositorio en tu máquina local:
-
-    ```bash
-    git clone https://github.com/capo-urjc/python-tools.git
-    ```
-
-    Accede al directorio del proyecto:
-
-    ```bash
-    cd proyecto
-    ```
-
-### **Paso 2: Desarrollar la Funcionalidad**
-
-1. Crea una nueva rama para trabajar en tu funcionalidad:
-
-    ```bash
-    git checkout -b feature/nueva-funcionalidad
-    ```
-
-2. Realiza las siguientes tareas:
-    - **2.1 Incluir tu código**: Añade el código necesario en los archivos correspondientes del proyecto.
-    - **2.2 Desarrollar los tests unitarios**: Escribe tests para validar la funcionalidad en la carpeta de tests.
-    - **2.3 Documentar el código**: Añade docstrings en formato Google y, si es necesario, actualiza la documentación manual en la carpeta `docs/`. Debes añadir tus archivos en docs/api.md en este formato "::: src.capo_tools.ejemplo"
-
-### **Paso 3: Verificar el Funcionamiento Correcto**
-
-1. Si has añadido nuevas dependencias:
-    - Instálalas y agrégalas de forma manual al archivo `pyproject.toml` en la sección [tool.pdm.dev-dependencies]:
-
-      ```bash
-      pip install nombre-libreria
-      ```
-      
- 2. Asegúrate de que el código pasa las acciones:
-    - Python package: Lo puedes activar haciendo push a tu rama de desarrollo o a cualquier rama. Revisa el feedback de flake8 para la calidad del código y el feedback de pytest con los tests unitarios. Modificar las restricciones de lint con flake8 si es necesario según tus requisitos, al igual que a la hora de pasar los tests con pypi.
-    - Upload python package: Solo lo puedes activar publicando un realease, pero puedes hacer pruebas en tu rama. Revisa que el nombre de versión del tag del realease es correcto con el formato "vX.X.X". Verificar que el paquete se ha construido correctamente con twine. Por último, comprobar que se ha subido correctamente a TestPypi.
-    - Generate and publish documentation: Lo puedes activar de forma manual es la pestaña actions de Github, importante activarla en tu rama de desarrollo. Se activa automaticamente cuando se hace push a main. Comprueba en https://capo-urjc.github.io/python-tools/ que se ha subido la documentación correctamente. La documentación del código está en el apartado API. Para ello tiene que estar en docs/api.md vuestros archivos añadidos.
-
-
-
-
-### **Paso 4: Crear el Pull Request**
-
-1. Sube tus cambios a tu rama remota:
-
-    ```bash
-    git push origin feature/nueva-funcionalidad
-    ```
-
-2. Abre un Pull Request en GitHub contra la rama `main`.
-
-3. Verifica que las acciones automatizadas en GitHub Actions se ejecuten correctamente:
-    - La acción **Python Package** debe pasar sin errores.
-    - La acción **Generate and Publish Documentation** debe generar la documentación correctamente.
-
----
-
-## 3. Consideraciones Adicionales
-
-### **Errores en las Acciones**
-- Si alguna acción falla, revisa los logs en la pestaña **Actions** de GitHub para identificar el problema.
-- Soluciona los errores y haz un nuevo push.
-
-### **Credenciales para Test PyPI**
-- Asegúrate de que las credenciales están configuradas en los **secrets** del repositorio si necesitas publicar un paquete.
-
----
-
 ## Resumen del Pipeline con ejemplo
 
-1. **Clonar el repositorio**:
+1. **Clonar el repositorio y preparar el proyecto**:
     ```bash
     git clone https://github.com/capo-urjc/python-tools.git
-    cd proyecto
+    cd python-tools
+    python -m venv venv
+    source venv/bin/activate  # En Linux/macOS
+    venv\Scripts\activate    # En Windows
+    pip install pdm
+    pdm install
     ```
 
 2. **Desarrollar la funcionalidad**:
@@ -116,9 +29,11 @@ Estas acciones están explicadas más detalladamente en la sección "Acciones ex
     - Documentar el código con docstrings y actualizar `docs/` si es necesario.
 
 3. **Verificar el funcionamiento correcto**:
-    - Si has añadido nuevas dependencias, instálalas y agrégalas en `pyproject.toml`
-    - Asegúrate de que el código pasa las acciones
-
+    ```bash
+    pdm add <dependencia>
+    pdm run pytest
+    mkdocs build
+    ```
 
 4. **Crear el Pull Request**:
     - Subir los cambios:
@@ -131,3 +46,123 @@ Estas acciones están explicadas más detalladamente en la sección "Acciones ex
 
 5. **Confirmar que las acciones de GitHub se ejecuten correctamente**:
     - Validar que todas las acciones pasan sin errores.
+  
+---
+
+## Pipeline de trabajo para los colaboradores
+
+### **Paso 1: Clonar el repositorio y preparar el proyecto**
+1. Clonar el repositorio
+    ```bash
+    git clone https://github.com/capo-urjc/python-tools.git
+    cd python-tools
+    ```
+
+2. Crear un entorno virtual Python
+    Usando virtualenv:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # En Linux/macOS
+    venv\Scripts\activate    # En Windows
+    ```
+
+    Usando Conda:
+    ```bash
+    conda create --name <nombre_del_entorno> python=3.10 -y
+    conda activate <nombre_del_entorno>
+    ```
+
+3. Instalar PDM
+    ```bash
+    pip install pdm
+    ```
+
+4. Instalar las dependencias del proyecto
+    ```bash
+    pdm install
+
+### **Paso 2: Desarrollar la funcionalidad**
+
+1. Crea una nueva rama para trabajar en tu funcionalidad:
+
+    ```bash
+    git checkout -b feature/nueva-funcionalidad
+    ```
+
+2. Realiza las siguientes tareas:
+    - **2.1 Incluir tu código**: Todo el código debe añadirse dentro del directorio `src/capo_tools`. Es importante organizar bien los archivos y módulos para mantener la estructura del proyecto clara y mantenible. Buenas prácticas:
+          **Organiza bien el código**: Ubica cada archivo en la carpeta adecuada según su funcionalidad.
+          **Sigue las convenciones del proyecto**: Respeta los estándares definidos en el repositorio.
+          **Consulta en caso de duda**: Si no estás seguro de dónde colocar el código, pregunta a los administradores del proyecto antes de proceder.
+    - **2.2 Desarrollar los tests unitarios**: Escribe tests para validar la funcionalidad en la carpeta de tests.
+    - **2.3 Documentar el código**: Añade docstrings en formato Google y, si es necesario, actualiza la documentación manual en la carpeta `docs/`. Debes añadir tus archivos en docs/api.md en este formato "::: src.capo_tools.ejemplo"
+
+### **Paso 3: Verificar el funcionamiento correcto**
+
+1. Dependencias:
+    Las dependencias se gestionan con `pdm` y se añaden de la siguiente manera:
+    
+    - Para añadir una dependencia general:
+      ```bash
+      pdm add <dependencia>
+      ```
+      Esto actualizará automáticamente el archivo `pyproject.toml`.
+    
+    - Para añadir una dependencia solo para desarrollo:
+      ```bash
+      pdm add --dev <dependencia>
+      ```
+
+    Es importante asegurarse de que las dependencias se añaden correctamente y en la categoría adecuada. Si no estás seguro, consulta con los administradores del proyecto.
+
+      
+      
+2. Comprobaciones:
+    Tests
+        Los tests se ejecutan con:
+        ```bash
+        pdm run pytest
+        ```
+        Desde la carpeta `tests/` o mediante una herramienta de desarrollo como PyCharm. Se debe verificar que todas las pruebas pasan y corregir cualquier error detectado.
+
+    Documentación
+        La documentación se compila y se prueba de la siguiente manera:
+        
+        - Para compilar la documentación:
+          ```bash
+          mkdocs build
+          ```
+        - Para visualizarla localmente:
+          ```bash
+          mkdocs serve
+          ```
+          Luego, accede a la página web que arranca para verificar que todo está correcto. Si hay errores, corrígelos antes de continuar.
+
+    Siguiendo estos pasos y recomendaciones, ayudarás a mantener un código limpio y ordenado dentro del proyecto.
+
+### **Paso 4: Crear el Pull Request**
+
+1. Sube tus cambios a tu rama remota:
+
+    ```bash
+    git push origin feature/nueva-funcionalidad
+    ```
+
+2. Abre un Pull Request en GitHub contra la rama `main`.
+
+3. Verifica que las acciones automatizadas en GitHub Actions se ejecuten correctamente:
+    - La acción **Python Package** debe pasar sin errores.
+    - La acción **Generate and Publish Documentation** debe generar la documentación correctamente.
+   Si alguna de las acciones da error, hay que detectar que problema hay, corregir y subir un nuevo commit a la misma rama.
+
+---
+
+## Consideraciones adicionales
+
+### **Errores en las acciones**
+- Si alguna acción falla, revisa los logs en la pestaña **Actions** de GitHub para identificar el problema.
+- Soluciona los errores y haz un nuevo push.
+
+
+
+
