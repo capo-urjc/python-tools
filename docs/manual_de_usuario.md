@@ -9,15 +9,27 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
 1. **Clonar el repositorio y preparar el proyecto**:
     ```bash
     git clone https://github.com/capo-urjc/python-tools.git
+    ```
+    ```bash
     cd python-tools
+   ```
+   ```bash
     python -m venv venv
+   ```
+   ```bash
     source venv/bin/activate  # En Linux/macOS
+   ```
+   ```bash
     venv\Scripts\activate    # En Windows
+   ```
+   ```bash
     pip install pdm
+   ```
+   ```bash
     pdm install
     ```
 
-2. **Desarrollar la funcionalidad**:
+3. **Desarrollar la funcionalidad**:
     - Crear una rama:
 
       ```bash
@@ -28,14 +40,18 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
     - Añadir tests unitarios.
     - Documentar el código con docstrings y actualizar `docs/` si es necesario.
 
-3. **Verificar el funcionamiento correcto**:
+4. **Verificar el funcionamiento correcto**:
     ```bash
     pdm add <dependencia>
+    ```
+    ```bash
     pdm run pytest
+    ```
+    ```bash
     mkdocs build
     ```
 
-4. **Crear el Pull Request**:
+6. **Crear el Pull Request**:
     - Subir los cambios:
 
       ```bash
@@ -44,7 +60,7 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
 
     - Abrir un Pull Request en GitHub.
 
-5. **Confirmar que las acciones de GitHub se ejecuten correctamente**:
+7. **Confirmar que las acciones de GitHub se ejecuten correctamente**:
     - Validar que todas las acciones pasan sin errores.
   
 ---
@@ -55,6 +71,8 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
 1. Clonar el repositorio
     ```bash
     git clone https://github.com/capo-urjc/python-tools.git
+    ```
+    ```bash
     cd python-tools
     ```
 
@@ -62,13 +80,19 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
     Usando virtualenv:
     ```bash
     python -m venv venv
+    ```
+    ```bash
     source venv/bin/activate  # En Linux/macOS
+    ```
+    ```bash
     venv\Scripts\activate    # En Windows
     ```
 
     Usando Conda:
     ```bash
     conda create --name <nombre_del_entorno> python=3.10 -y
+    ```
+    ```bash
     conda activate <nombre_del_entorno>
     ```
 
@@ -80,6 +104,7 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
 4. Instalar las dependencias del proyecto
     ```bash
     pdm install
+    ```
 
 ### **Paso 2: Desarrollar la funcionalidad**
 
