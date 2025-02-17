@@ -124,7 +124,9 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
 
 ### **Paso 3: Verificar el funcionamiento correcto**
 
-1. Dependencias:
+1. **Dependencias:**
+
+
     Las dependencias se gestionan con `pdm` y se añaden de la siguiente manera:
     
     - Para añadir una dependencia general:
@@ -142,28 +144,31 @@ Aquí se explica qué hacer para añadir funcionalidades al proyecto, gestionar 
 
       
       
-2. Comprobaciones:
+2. **Comprobaciones:**
+
+   
     **Tests**
         Los tests se ejecutan con:
-        ```bash
-        pdm run pytest
-        ```
+    ```bash
+    pdm run pytest
+    ```
         Desde la carpeta `tests/` o mediante una herramienta de desarrollo como PyCharm. Se debe verificar que todas las pruebas pasan y corregir cualquier error detectado.
+   
 
     **Documentación**
         La documentación se compila y se prueba de la siguiente manera:
 
         - Para compilar la documentación:
    
-          ```bash
-          mkdocs build
-          ```
+      ```bash
+      mkdocs build
+      ```
    
         - Para visualizarla localmente:
    
-          ```bash
-          mkdocs serve
-          ```
+      ```bash
+      mkdocs serve
+      ```
        Luego, accede a la página web que arranca para verificar que todo está correcto. Si hay errores, corrígelos antes de continuar.
 
     Siguiendo estos pasos y recomendaciones, ayudarás a mantener un código limpio y ordenado dentro del proyecto.
